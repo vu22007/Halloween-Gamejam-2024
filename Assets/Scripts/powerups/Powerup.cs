@@ -3,5 +3,5 @@ using UnityEngine;
 abstract public class Powerup
 {
     int price;
-    void apply();
+    public abstract void apply();
 }
