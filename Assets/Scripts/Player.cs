@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 
     public void PlayerAttack(){
         if (Input.GetMouseButton(0) && (coolDownTimer <= 0)) {
-            // equippedWeapon.Use();
+            equippedWeapon.Use(gameObject.transform.position);
             coolDownTimer = coolDownMax;
         } else {
             coolDownTimer -= Time.deltaTime;
