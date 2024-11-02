@@ -8,13 +8,15 @@ public class GameController : MonoBehaviour
     [SerializeField] Shop shop;
     [SerializeField] GameObject pauseMenu;
     List<Enemy> enemies;
-    int wave;
+    int highscore;
+    int currentWave;
     bool running;
 
 
     void Start()
     {
-        wave = 0;
+        player.PlayerStart();
+        currentWave = 0;
         enemies = new List<Enemy>();
         NewWave();
     }
@@ -45,15 +47,22 @@ public class GameController : MonoBehaviour
     }
 
     void NewWave(){
-        wave += 1;
-        int randomness = (int)Random.Range(0f, 3f) * wave;
-        int numberEnemies = 5 * wave + randomness;
+        currentWave += 1;
+        NewHighscoreCheck();
+        int randomness = (int)Random.Range(0f, 3f) * currentWave;
+        int numberEnemies = 5 * currentWave + randomness;
         for (int i = 0; i < numberEnemies; i++)
         {
-            Enemy enemy = PrefabFactory.SpawnEnemy(enemyPrefab, GenerateSpawnLocation(), wave);
+            Enemy enemy = PrefabFactory.SpawnEnemy(enemyPrefab, GenerateSpawnLocation(), currentWave);
             enemies.Add(enemy);
         }
         running = true;
+    }
+
+    void NewHighscoreCheck(){
+        if (currentWave > highscore){
+            highscore = currentWave;
+        }
     }
 
     Vector3 GenerateSpawnLocation(){
@@ -61,5 +70,7 @@ public class GameController : MonoBehaviour
         float randomTwo = Random.Range(-10f, 10f);
         return new Vector3(randomOne,randomTwo);
     }
+
+   
 
 }
