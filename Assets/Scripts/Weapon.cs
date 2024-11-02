@@ -9,5 +9,5 @@ abstract public class Weapon
         get{return damage;}
     }
 
-    abstract public void Use();
+    abstract public void Use(vector3 playerPosition);
 }
