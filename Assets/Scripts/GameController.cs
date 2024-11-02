@@ -7,18 +7,18 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Shop shop;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject gameOverScreen;
     List<Enemy> enemies;
     int highscore;
     int currentWave;
     bool running;
 
 
+
     void Start()
     {
-        player.PlayerStart();
-        currentWave = 0;
-        enemies = new List<Enemy>();
-        NewWave();
+        highscore = 0;
+        NewGame();
     }
 
     void Update()
@@ -39,11 +39,29 @@ public class GameController : MonoBehaviour
             pauseMenu.SetActive(running);
             running = !running;
         }
-        
     }
 
     bool WaveOver(){
         return enemies.Count == 0;
+    }
+
+    void PlayerTakeDamage(float amount){
+        player.TakeDamage(amount);
+        if(player.dead){
+            GameOver();
+        }
+    }
+
+    void GameOver(){
+        running = false;
+        gameOverScreen.SetActive(true);
+    }
+
+    public void NewGame(){
+        player.PlayerStart();
+        currentWave = 0;
+        enemies = new List<Enemy>();
+        NewWave();
     }
 
     void NewWave(){

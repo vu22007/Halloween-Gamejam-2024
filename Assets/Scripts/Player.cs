@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         }
     }
     
-    public void TakeDamage(int damage){
+    public void TakeDamage(float damage){
         health -= damage;
         if(DeadCheck()){
             dead = true;
