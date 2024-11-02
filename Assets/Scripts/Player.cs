@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     Gun equippedGun;
     float health;
->>>>>>> d23d929 (Adding bullet prefab)
     float maxHealth;
     float speed = 10f;
     int money;

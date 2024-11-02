@@ -24,6 +24,7 @@ public static class PrefabFactory
     public static Bullet SpawnBullet(GameObject prefab, Vector3 spawnPosition, Vector3 moveDirection){
         GameObject instantiatedBullet = Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
         Bullet newBullet = instantiatedBullet.GetComponent<Bullet>();
+        newBullet.OnCreated(moveDirection);
         return newBullet;
     }
 
