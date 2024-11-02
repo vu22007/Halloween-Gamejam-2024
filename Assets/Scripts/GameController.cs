@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] GameObject enemyPrefab;
+    [SerializeField] List<Bullet> bullets;
     [SerializeField] Shop shop;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject gameOverScreen;
