@@ -8,6 +8,7 @@ public class Shop : MonoBehaviour
     [SerializeField] List<TextMeshProUGUI> shopPlacesTexts;
     [SerializeField] List<GameObject> shopPlacesButtons;
     [SerializeField] GameObject shopInterface;
+    [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] Player player;
 
 
@@ -16,11 +17,12 @@ public class Shop : MonoBehaviour
     public void SetupShop(){
         for (int i = 0; i < powerups.Count; i++)
         {
-            shopPlacesTexts[i].text = powerups[i].ItemName + powerups[i].Price;
+            shopPlacesTexts[i].text = powerups[i].ItemName + " " + powerups[i].Price;
             shopPlacesButtons[i].SetActive(true);
         }
     }
     public void StartShop(){
+        UpdateMoneyText();
         shopInterface.SetActive(true);
         isUp = true;
     }
@@ -34,6 +36,11 @@ public class Shop : MonoBehaviour
         PowerUp item = powerups[index];
         if(player.SpendMoney(item.Price)){
             player.AddPowerUp(item);
+            UpdateMoneyText();
         }
+    }
+
+    void UpdateMoneyText(){
+        moneyText.text = "Money: " + player.money;
     }
 }

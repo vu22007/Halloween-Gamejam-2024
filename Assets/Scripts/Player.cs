@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public float health;
     float maxHealth;
     float speed = 10;
-    int money;
+    public int money;
     float counPickupDistance;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         speed = 10f;
         maxHealth = 30f;
         health = maxHealth;
-        money = 0;
+        money = 30;
         dead = false;
     }
 

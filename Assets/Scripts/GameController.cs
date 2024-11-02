@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] TextMeshProUGUI highscoreText;
+    [SerializeField] PopUpText popUpText;
     List<Enemy> enemies;
     int highscore;
     int currentWave;
@@ -47,7 +48,7 @@ public class GameController : MonoBehaviour
             running = !running;
         }
         //Testing
-        if(Input.GetKeyDown(KeyCode.S) && !shop.isUp){
+        if(Input.GetKeyDown(KeyCode.X) && !shop.isUp){
             running = false;
             shop.StartShop();
         }
@@ -118,6 +119,7 @@ public class GameController : MonoBehaviour
             enemies.Add(enemy);
         }
         running = true;
+        StartCoroutine(popUpText.QueuePopUp("Wave " + currentWave, 0.1f, Color.white));
     }
 
     void NewHighscoreCheck(){
