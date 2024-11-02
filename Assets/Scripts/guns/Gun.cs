@@ -9,7 +9,7 @@ public class Gun
         get{return damage;}
     }
 
-    public Bullet Use(Bullet bulletSprite, Vector3 playerPosition, Vector3 attackDirection){
+    public Bullet Use(GameObject bulletSprite, Vector3 playerPosition, Vector3 attackDirection){
         return PrefabFactory.SpawnBullet(bulletSprite, playerPosition, attackDirection);
     }
 }
