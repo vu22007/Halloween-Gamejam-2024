@@ -18,10 +18,13 @@ public class Player : MonoBehaviour
     float coolDownTimer = 0f;
     public bool dead;
     Camera cam;
-
     public bool invincible;
-
     float invincibilityTimer = 1f;
+    private Vector2 leftBottom;
+    private Vector2 rightTop;
+    private SpriteRenderer spriteRenderer;
+    private Vector2 spriteSize;
+    private Vector2 spriteHalfSize;
 
     public void PlayerStart(){
         powerUps = new List<PowerUp>();
@@ -33,10 +36,16 @@ public class Player : MonoBehaviour
         health = maxHealth;
         money = 30;
         dead = false;
+        leftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
+        rightTop = Camera.main.ViewportToWorldPoint(Vector3.one);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteSize     = spriteRenderer.sprite.bounds.size;
+        spriteHalfSize = spriteRenderer.sprite.bounds.extents;
     }
 
     public Bullet PlayerUpdate(){
         PlayerMovement();
+        CheckPlayerBordered();
         return PlayerAttack();
     }
 
@@ -61,6 +70,31 @@ public class Player : MonoBehaviour
             coolDownTimer -= Time.deltaTime;
             return null;
         }
+    }
+
+    private void CheckPlayerBordered(){
+        float spriteLeft   = transform.position.x - spriteHalfSize.x;
+        float spriteRight  = transform.position.x + spriteHalfSize.x;
+        float spriteBottom = transform.position.y - spriteHalfSize.y;
+        float spriteTop    = transform.position.y + spriteHalfSize.y;
+        Vector3 clampedPosition = transform.position;
+        if(spriteLeft < leftBottom.x)
+        {
+            clampedPosition.x = leftBottom.x + spriteHalfSize.x;
+        }
+        else if(spriteRight > rightTop.x)
+        {
+            clampedPosition.x = rightTop.x - spriteHalfSize.x;
+        }
+        if(spriteBottom < leftBottom.y)
+        {
+            clampedPosition.y = leftBottom.y + spriteHalfSize.y;
+        }
+        else if(spriteTop > rightTop.y)
+        {
+            clampedPosition.y = rightTop.y - spriteHalfSize.y;
+        }
+        transform.position = clampedPosition;
     }
 
     IEnumerator IsHurting() {
