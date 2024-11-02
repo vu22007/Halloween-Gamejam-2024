@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -31,14 +32,24 @@ public class Enemy : MonoBehaviour
         Vector3 movement = relativePosition * speed * Time.deltaTime;
         gameObject.transform.position += movement;
     }
-    public void TakeDamage(int damage, Vector3 playerLocation){
+    public List<Coin> TakeDamage(int damage, Vector3 playerLocation){
         Vector3 enemyPos = gameObject.transform.position;
-        Vector3 relativePosition = (playerLocation - enemyPos).normalized;
-        gameObject.transform.position += - relativePosition * damage/100;
+        //Vector3 relativePosition = (playerLocation - enemyPos).normalized;
+        //gameObject.transform.position += - relativePosition * damage/100;
         health -= damage;
-                if (DeadCheck()){
-            PrefabFactory.SpawnCoins(coinPrefab, enemyPos, 5);
+        List<Coin> coins = new List<Coin>();
+        coins = DispenseCoins(enemyPos);
+
+        return coins;
+    }
+
+    public List<Coin> DispenseCoins(Vector3 enemyPos){
+        List<Coin> coins = new List<Coin>();
+        if (DeadCheck()){
+            PrefabFactory generate = new PrefabFactory();
+            coins = generate.SpawnCoins(coinPrefab, enemyPos, coinsDrop);
         }
+        return coins;
     }
 
     bool DeadCheck(){

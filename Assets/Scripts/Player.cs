@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     float maxHealth;
     float speed = 10f;
     int money;
+    float counPickupDistance;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
     float coolDownMax = 2f;

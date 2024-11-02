@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     List<Bullet> bullets;
     int wave;
     bool running;
+    List<Coin> coins = new List<Coin>();
 
 
     void Start()
@@ -23,6 +24,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+
         if(running){
             Bullet newBullet = player.PlayerUpdate();
             if (newBullet != null) {
@@ -46,7 +48,16 @@ public class GameController : MonoBehaviour
             pauseMenu.SetActive(running);
             running = !running;
         }
-        
+
+        if (coins != null) {
+            for (int i = coins.Count - 1; i >= 0; i--) {
+                Coin coin = coins[i];
+                bool coin_destroyed = coin.DestroyCoin(player);
+                if (coin_destroyed) {
+                    coins.RemoveAt(i);
+                }
+            }
+        }
     }
 
     bool WaveOver(){
