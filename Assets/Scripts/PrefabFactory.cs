@@ -20,14 +20,15 @@ public static class PrefabFactory
     public static Bullet SpawnBullet(GameObject prefab, Vector3 spawnPosition, Vector3 moveDirection){
         GameObject instantiatedBullet = Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
         Bullet newBullet = instantiatedBullet.GetComponent<Bullet>();
+        newBullet.OnCreated(moveDirection);
         return newBullet;
     }
 
     public static Enemy SpawnEnemy(GameObject prefab, Vector3 spawnPosition, int wave){
         GameObject enemy = Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
-        Enemy enemyClass = enemy.GetComponent<Enemy>();
-        enemyClass.OnCreated(CalculateMaxHealth(wave), CalculateDamage(wave), CalculateSpeed(wave));
-        return enemyClass;
+        Enemy newEnemy = enemy.GetComponent<Enemy>();
+        newEnemy.OnCreated(CalculateMaxHealth(wave), CalculateDamage(wave), CalculateSpeed(wave));
+        return newEnemy;
     }
 
     static float CalculateMaxHealth(int wave){

@@ -5,10 +5,10 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] GameObject enemyPrefab;
-    [SerializeField] List<Bullet> bullets;
     [SerializeField] Shop shop;
     [SerializeField] GameObject pauseMenu;
     List<Enemy> enemies;
+    List<Bullet> bullets;
     int wave;
     bool running;
 
@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     {
         wave = 0;
         enemies = new List<Enemy>();
+        bullets = new List<Bullet>();
         NewWave();
     }
 

@@ -36,9 +36,9 @@ public class Player : MonoBehaviour
 
     public void PlayerAttack(List<Bullet> bullets){
         if (Input.GetMouseButton(0) && (coolDownTimer <= 0)) {
-            Vector3 direction = Input.mousePosition - gameObject.transform.position;
-            bullets.Add(equippedGun.Use(bulletPrefab, gameObject.transform.position, direction));
             coolDownTimer = coolDownMax;
+            Vector3 direction = (Input.mousePosition - gameObject.transform.position).normalized;
+            bullets.Add(equippedGun.Use(bulletPrefab, gameObject.transform.position, direction));
         } else {
             coolDownTimer -= Time.deltaTime;
         }

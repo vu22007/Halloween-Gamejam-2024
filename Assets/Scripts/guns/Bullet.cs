@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class Bullet
+public class Bullet : MonoBehaviour
 {
     Vector3 direction;
-    float speed;
+    float speed = 100f;
     Rigidbody2D body;
 
-    public void OnCreate(Vector3 startDirection){
+    public void OnCreated(Vector3 startDirection){
+        body = GetComponent<Rigidbody2D>();
         direction = startDirection;
     }
 
     public void BulletUpdate(){
-        body.linearVelocity = direction * speed;
+        gameObject.transform.position += direction * speed * Time.deltaTime;
     }
 }
