@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
             invincible = true;
             StartCoroutine(IsHurting());
             if(DeadCheck()){
+                body.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
                 dead = true;
             }
         }
