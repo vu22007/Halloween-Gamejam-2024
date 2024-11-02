@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Shop shop;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject gameOverScreen;
+    [SerializeField] TextMeshProUGUI highscoreText;
     List<Enemy> enemies;
     List<Bullet> bullets;
     int highscore;
@@ -75,14 +78,20 @@ public class GameController : MonoBehaviour
 
     void GameOver(){
         running = false;
+        UpdateGameOverText();
         gameOverScreen.SetActive(true);
     }
 
     public void NewGame(){
+        gameOverScreen.SetActive(false);
         player.PlayerStart();
         currentWave = 0;
         enemies = new List<Enemy>();
         NewWave();
+    }
+
+    public void Quit(){
+        Application.Quit();
     }
 
     void NewWave(){
@@ -102,6 +111,10 @@ public class GameController : MonoBehaviour
         if (currentWave > highscore){
             highscore = currentWave;
         }
+    }
+
+    void UpdateGameOverText(){
+        highscoreText.text = "you did " + currentWave +" waves, the highscore is " + highscore;
     }
 
     Vector3 GenerateSpawnLocation(){
