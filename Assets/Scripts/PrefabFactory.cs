@@ -21,8 +21,9 @@ public static class PrefabFactory
             return coins;
     }
 
-    public static void SpawnBullet(GameObject prefab, Vector3 spawnPosition){
-        GameObject _bullet = Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
+    public static Bullet SpawnBullet(Bullet prefab, Vector3 spawnPosition, Vector3 moveDirection){
+        Bullet newBullet = Bullet(Object.Instantiate(prefab, spawnPosition, Quaternion.identity));
+        return newBullet;
     }
 
     public static Enemy SpawnEnemy(GameObject prefab, Vector3 spawnPosition, int wave){
