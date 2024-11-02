@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     int damage;
     int coinsDrop;
 
-    public void EnemyMovement(){
+    public void EnemyMovement(Vector3 playerLocation){
         //just go towards the player
     }
 }
