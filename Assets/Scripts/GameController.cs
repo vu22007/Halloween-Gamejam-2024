@@ -12,10 +12,11 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        //player.PlayerMovement();
+        player.PlayerMovement();
         foreach (Enemy enemy in enemies)
         {
             enemy.EnemyMovement(player.gameObject.transform.position);
         }
     }
+
 }
