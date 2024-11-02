@@ -34,16 +34,4 @@ public static class PrefabFactory
         newEnemy.OnCreated(CalculateMaxHealth(wave), CalculateDamage(wave), CalculateSpeed(wave));
         return newEnemy;
     }
-
-    static float CalculateMaxHealth(int wave){
-        float randomness = Random.Range(0f, 5f * wave);
-        return 20f + randomness + wave * 6;
-    }
-    static float CalculateDamage(int wave){
-        float randomness = Random.Range(0f, 2f * wave);
-        return 5f + randomness + wave * 2;
-    }
-    static float CalculateSpeed(int wave){
-        return 1f + 0.01f * wave;
-    }
 }
