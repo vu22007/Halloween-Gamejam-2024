@@ -10,6 +10,20 @@ public class Enemy : MonoBehaviour
     int coinsDrop;
 
     public void EnemyMovement(Vector3 playerLocation){
-        //just go towards the player
+        
+    }
+
+    public void TakeDamage(int damage){
+        health -= damage;
+        if (DeadCheck()){
+            //spawn coins equal to coinsDrop
+        }
+    }
+
+    bool DeadCheck(){
+        if(health <= 0){
+            return true;
+        }
+        return false;
     }
 }

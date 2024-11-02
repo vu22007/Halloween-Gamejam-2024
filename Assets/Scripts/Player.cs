@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    Weapon equippedWeapon;
     int health;
     int maxHealth;
     float speed;
@@ -10,15 +11,26 @@ public class Player : MonoBehaviour
     public void PlayerMovement(){
         //use speed
     }
+
+    public void DealDamage(Enemy enemy){
+        enemy.TakeDamage(equippedWeapon.Damage);
+    }
     
-    void TakeDamage(int damage){
+    public void TakeDamage(int damage){
         health -= damage;
         if (GameOverCheck()){
             //game over stuff
         }
     }
 
-    void GetMoney(int amount){
+    public void Heal(int amount){
+        health += amount;
+        if(health > maxHealth){
+            health = maxHealth;
+        }
+    }
+
+    public void GetMoney(int amount){
         money += amount;
     }
 
