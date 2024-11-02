@@ -20,18 +20,4 @@ public static class PrefabFactory
             }
             return coins;
     }
-
-    public static Bullet SpawnBullet(GameObject prefab, Vector3 spawnPosition, Vector3 moveDirection){
-        GameObject instantiatedBullet = Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
-        Bullet newBullet = instantiatedBullet.GetComponent<Bullet>();
-        newBullet.OnCreated(moveDirection);
-        return newBullet;
-    }
-
-    public static Enemy SpawnEnemy(GameObject prefab, Vector3 spawnPosition, int wave){
-        GameObject enemy = Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
-        Enemy newEnemy = enemy.GetComponent<Enemy>();
-        newEnemy.OnCreated(wave);
-        return newEnemy;
-    }
 }

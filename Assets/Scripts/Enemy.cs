@@ -46,7 +46,8 @@ public class Enemy : MonoBehaviour
     public List<Coin> DispenseCoins(Vector3 enemyPos){
         List<Coin> coins = new List<Coin>();
         if (DeadCheck()){
-            coins = PrefabFactory.SpawnCoins(coinPrefab, enemyPos, coinsDrop);
+            PrefabFactory generate = new PrefabFactory();
+            coins = generate.SpawnCoins(coinPrefab, enemyPos, coinsDrop);
         }
         return coins;
     }
