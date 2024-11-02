@@ -1,8 +1,9 @@
 using UnityEngine;
 
-abstract public class Gun
+abstract public class Gun : Weapon
 {
-    public void Use(vector3 playerPosition){
-      PrefabFactory.SpawnBullet();
+    public void Use(Vector3 playerPosition, Vector3 attackDirection){
+      
+      PrefabFactory.SpawnBullet(prefab, playerPosition, attackDirection);
     }
 }

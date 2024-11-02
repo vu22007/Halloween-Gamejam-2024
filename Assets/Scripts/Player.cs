@@ -3,9 +3,15 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
+<<<<<<< HEAD
     [SerializeField] GameObject bulletPrefab;
     Gun equippedGun;
     float health;
+=======
+    [SerializeField] GameObject bullet;
+    Weapon equippedWeapon;
+    public float health;
+>>>>>>> d23d929 (Adding bullet prefab)
     float maxHealth;
     float speed = 10f;
     int money;
@@ -45,6 +51,11 @@ public class Player : MonoBehaviour
 
     public Bullet PlayerAttack(){
         if (Input.GetMouseButton(0) && (coolDownTimer <= 0)) {
+<<<<<<< HEAD
+=======
+            Vector3 direction = mouse - gameObject.transform.position;
+            equippedWeapon.Use(gameObject.transform.position, direction);
+>>>>>>> d23d929 (Adding bullet prefab)
             coolDownTimer = coolDownMax;
             Vector2 mousePos = Input.mousePosition;
             Vector3 worldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
