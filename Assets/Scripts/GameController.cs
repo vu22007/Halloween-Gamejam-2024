@@ -46,6 +46,11 @@ public class GameController : MonoBehaviour
             pauseMenu.SetActive(running);
             running = !running;
         }
+        //Testing
+        if(Input.GetKeyDown(KeyCode.S) && !shop.isUp){
+            running = false;
+            shop.StartShop();
+        }
 
         if (coins != null) {
             for (int i = coins.Count - 1; i >= 0; i--) {

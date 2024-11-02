@@ -60,6 +60,18 @@ public class Player : MonoBehaviour
 
     public void AddPowerUp(PowerUp powerUp){
         powerUps.Add(powerUp);
+        switch (powerUp.Effect)
+        {
+            case "MaxHealth":
+                maxHealth += powerUp.Magnitude;
+                health += powerUp.Magnitude;
+                break;
+            case "Speed":
+                speed += powerUp.Magnitude;
+                break;
+            default:
+                break;
+        }
     }
 
     public void Heal(int amount){

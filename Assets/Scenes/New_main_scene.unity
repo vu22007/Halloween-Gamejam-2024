@@ -183,6 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773a866a787944b54b2531f75adbf1da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerups:
+  - {fileID: 11400000, guid: 297c0a3a7879f43819959f3244176dbf, type: 2}
+  - {fileID: 11400000, guid: 33228ec87d44b4ac3b8d7a15811d2ccc, type: 2}
   shopPlacesTexts:
   - {fileID: 1752607099}
   - {fileID: 1043678493}
@@ -1350,7 +1353,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: -180}
+  m_AnchoredPosition: {x: 0, y: -180}
   m_SizeDelta: {x: 500, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1047677878
