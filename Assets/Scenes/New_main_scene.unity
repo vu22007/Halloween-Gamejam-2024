@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1577312928}
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 2100199797537917032, guid: 919946acb64204c09812d20a187edda0, type: 3}
   shop: {fileID: 166126144}
   pauseMenu: {fileID: 1597628412}
 --- !u!4 &1656193215

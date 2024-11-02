@@ -46,13 +46,20 @@ public class GameController : MonoBehaviour
 
     void NewWave(){
         wave += 1;
-        Enemy enemy = PrefabFactory.SpawnEnemy(enemyPrefab, GenerateSpawnLocation(), wave);
-        enemies.Add(enemy);
+        int randomness = (int)Random.Range(0f, 3f) * wave;
+        int numberEnemies = 5 * wave + randomness;
+        for (int i = 0; i < numberEnemies; i++)
+        {
+            Enemy enemy = PrefabFactory.SpawnEnemy(enemyPrefab, GenerateSpawnLocation(), wave);
+            enemies.Add(enemy);
+        }
         running = true;
     }
 
     Vector3 GenerateSpawnLocation(){
-        return new Vector3(1f,2f);
+        float randomOne = Random.Range(-10f, 10f);
+        float randomTwo = Random.Range(-10f, 10f);
+        return new Vector3(randomOne,randomTwo);
     }
 
 }

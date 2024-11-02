@@ -29,12 +29,14 @@ public static class PrefabFactory
     }
 
     static float CalculateMaxHealth(int wave){
-        return 20f;
+        float randomness = Random.Range(0f, 5f * wave);
+        return 20f + randomness + wave * 6;
     }
     static float CalculateDamage(int wave){
-        return 4f;
+        float randomness = Random.Range(0f, 2f * wave);
+        return 5f + randomness + wave * 2;
     }
     static float CalculateSpeed(int wave){
-        return 1f;
+        return 1f + 0.01f * wave;
     }
 }
