@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     {
         if(running){
             Bullet newBullet = player.PlayerUpdate();
-            if (newBullet) {
+            if (newBullet != null) {
                 bullets.Add(newBullet);
             }
             foreach (Enemy enemy in enemies)
