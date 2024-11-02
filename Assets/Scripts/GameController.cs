@@ -125,7 +125,7 @@ public class GameController : MonoBehaviour
         currentWave = 0;
         foreach (Enemy enemy in enemies)
         {
-            Destroy(enemy);
+            Destroy(enemy.gameObject);
         }
         enemies = new List<Enemy>();
         NewWave();
