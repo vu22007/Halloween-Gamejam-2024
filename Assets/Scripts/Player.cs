@@ -19,9 +19,9 @@ public class Player : MonoBehaviour
         equippedGun = new Gun();
     }
 
-    public void PlayerUpdate(List<Bullet> bullets){
+    public Bullet PlayerUpdate(){
         PlayerMovement();
-        PlayerAttack(bullets);
+        return PlayerAttack();
     }
 
     public void PlayerMovement(){
@@ -34,13 +34,14 @@ public class Player : MonoBehaviour
         body.linearVelocity = new Vector2(horizontal * speed, vertical * speed);
     }
 
-    public void PlayerAttack(List<Bullet> bullets){
+    public Bullet PlayerAttack(){
         if (Input.GetMouseButton(0) && (coolDownTimer <= 0)) {
             coolDownTimer = coolDownMax;
             Vector3 direction = (Input.mousePosition - gameObject.transform.position).normalized;
-            bullets.Add(equippedGun.Use(bulletPrefab, gameObject.transform.position, direction));
+            return equippedGun.Use(bulletPrefab, gameObject.transform.position, direction);
         } else {
             coolDownTimer -= Time.deltaTime;
+            return null;
         }
     }
     
