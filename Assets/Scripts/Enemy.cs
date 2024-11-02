@@ -3,7 +3,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject coinPrefab;
-    [SerializeField] GameObject enemyPrefab;
     SpriteRenderer spriteRenderer;
     public float speed;
     float health;
