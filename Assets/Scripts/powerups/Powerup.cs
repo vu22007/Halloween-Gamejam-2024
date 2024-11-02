@@ -1,6 +1,6 @@
 using UnityEngine;
 
-abstract public class Powerup
+abstract public class PowerUp
 {
     int price;
 }

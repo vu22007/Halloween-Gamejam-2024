@@ -1,6 +1,6 @@
 using UnityEngine;
 
-abstract public class Statup : Powerup
+abstract public class StatUp : PowerUp
 {
     float magnitude;
     public abstract void apply();
