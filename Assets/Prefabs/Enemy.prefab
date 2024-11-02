@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8361860396806312027}
   - component: {fileID: 7159496026274626751}
-  - component: {fileID: 3286305637835775897}
+  - component: {fileID: 2779759472026383042}
+  - component: {fileID: 9009689416092344089}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -100,5 +101,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049e7a83e7a9c40a3b7a3241fc488f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 0}
-  speed: 0
+  coinPrefab: {fileID: 1709265794444999925, guid: da5fac5e1905541008bd5bc8548fa332, type: 3}
+  speed: 1
+--- !u!50 &9009689416092344089
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100199797537917032}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
