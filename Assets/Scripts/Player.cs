@@ -20,9 +20,6 @@ public class Player : MonoBehaviour
     public void PlayerMovement (){
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical"); 
-    }
-
-    private void FixedUpdate(){
         if (horizontal != 0 && vertical != 0) {
             horizontal *= moveLimiter;
             vertical *= moveLimiter;
