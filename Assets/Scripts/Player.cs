@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] GameObject bullet;
     Weapon equippedWeapon;
     public float health;
     float maxHealth;
@@ -41,7 +42,8 @@ public class Player : MonoBehaviour
 
     public void PlayerAttack(){
         if (Input.GetMouseButton(0) && (coolDownTimer <= 0)) {
-            equippedWeapon.Use(gameObject.transform.position);
+            Vector3 direction = mouse - gameObject.transform.position;
+            equippedWeapon.Use(gameObject.transform.position, direction);
             coolDownTimer = coolDownMax;
         } else {
             coolDownTimer -= Time.deltaTime;
