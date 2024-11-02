@@ -7,10 +7,10 @@ public class Bullet
     Rigidbody2D body;
 
     public void OnCreate(Vector3 startDirection){
-      direction = startDirection;
+        direction = startDirection;
     }
 
     public void BulletUpdate(){
-      body.linearVelocity = direction * speed;
+        body.linearVelocity = direction * speed;
     }
 }

@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] List<Enemy> enemies;
+    [SerializeField] List<Bullet> bullets;
     [SerializeField] Shop shop;
     [SerializeField] GameObject pauseMenu;
     int wave;
@@ -20,10 +21,14 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if(running){
-            player.PlayerMovement();
+            player.PlayerUpdate(bullets);
             foreach (Enemy enemy in enemies)
             {
                 enemy.EnemyMovement(player.gameObject.transform.position);
+            }
+            foreach (Bullet bullet in bullets)
+            {
+                bullet.BulletUpdate();
             }
             if(WaveOver()){
                 running = false;

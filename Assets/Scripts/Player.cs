@@ -1,12 +1,13 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] GameObject bullet;
-    Weapon equippedWeapon;
+    [SerializeField] Bullet bulletPrefab;
+    Gun equippedGun;
     float health;
     float maxHealth;
-    float speed = 10;
+    float speed = 10f;
     int money;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
@@ -15,12 +16,12 @@ public class Player : MonoBehaviour
 
     void Start (){
         body = GetComponent<Rigidbody2D>(); 
-        speed = 10f;
+        equippedGun = new Gun();
     }
 
-    public void PlayerUpdate(){
+    public void PlayerUpdate(List<Bullet> bullets){
         PlayerMovement();
-        PlayerAttack();
+        PlayerAttack(bullets);
     }
 
     public void PlayerMovement(){
@@ -33,10 +34,10 @@ public class Player : MonoBehaviour
         body.linearVelocity = new Vector2(horizontal * speed, vertical * speed);
     }
 
-    public void PlayerAttack(){
+    public void PlayerAttack(List<Bullet> bullets){
         if (Input.GetMouseButton(0) && (coolDownTimer <= 0)) {
-            Vector3 direction = mouse - gameObject.transform.position;
-            equippedWeapon.Use(gameObject.transform.position, direction);
+            Vector3 direction = Input.mousePosition - gameObject.transform.position;
+            bullets.Add(equippedGun.Use(bulletPrefab, gameObject.transform.position, direction));
             coolDownTimer = coolDownMax;
         } else {
             coolDownTimer -= Time.deltaTime;
