@@ -14,6 +14,10 @@ public class Player : MonoBehaviour
         body = GetComponent<Rigidbody2D>(); 
     }
 
+    public void PlayerUpdate(){
+        PlayerMovement();
+    }
+
     public void PlayerMovement (){
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical"); 
