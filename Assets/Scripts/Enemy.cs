@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] GameObject coins;
     SpriteRenderer spriteRenderer;
     public float speed;
     int health;
@@ -12,14 +13,18 @@ public class Enemy : MonoBehaviour
     public void EnemyMovement(Vector3 playerLocation){
         //just go towards the player
         Vector3 enemyPos = gameObject.transform.position;
-        Vector3 relativePosition = playerLocation - enemyPos;
-        Vector3 movement = relativePosition.normalized * speed * Time.deltaTime;
+        Vector3 relativePosition = (playerLocation - enemyPos).normalized;
+        Vector3 movement = relativePosition * speed * Time.deltaTime;
         gameObject.transform.position += movement;
     }
-    public void TakeDamage(int damage){
+    public void TakeDamage(int damage, Vector3 playerLocation){
+        Vector3 enemyPos = gameObject.transform.position;
+        Vector3 relativePosition = (playerLocation - enemyPos).normalized;
+        gameObject.transform.position += - relativePosition * damage/100;
         health -= damage;
                 if (DeadCheck()){
-            //spawn coins equal to coinsDrop
+            PrefabFactory generate = new PrefabFactory();
+            generate.SpawnCoins(coins, enemyPos, 5);
         }
     }
 

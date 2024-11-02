@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     }
 
     public void DealDamage(Enemy enemy){
-        enemy.TakeDamage(equippedWeapon.Damage);
+        enemy.TakeDamage(equippedWeapon.Damage, gameObject.transform.position);
     }
     
     public void TakeDamage(int damage){
