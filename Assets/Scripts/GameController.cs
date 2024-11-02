@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        enemies = new List<Enemy>();
         highscore = 0;
         shop.SetupShop();
         NewGame();
@@ -78,12 +79,27 @@ public class GameController : MonoBehaviour
         gameOverScreen.SetActive(false);
         player.PlayerStart();
         currentWave = 0;
+        foreach (Enemy enemy in enemies)
+        {
+            Destroy(enemy);
+        }
         enemies = new List<Enemy>();
         NewWave();
     }
 
     public void Quit(){
         Application.Quit();
+    }
+
+    public void Continue(){
+        shop.CloseShop();
+        running = true;
+        NewWave();
+    }
+
+    public void KillEnemy(Enemy enemy){
+        enemies.Remove(enemy);
+        Destroy(enemy);
     }
 
     void NewWave(){
