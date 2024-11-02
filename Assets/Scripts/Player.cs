@@ -5,11 +5,11 @@ public class Player : MonoBehaviour
     Weapon equippedWeapon;
     float health;
     float maxHealth;
-    float speed;
+    float speed = 10;
     int money;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
-    float coolDownMax = 3f;
+    float coolDownMax = 2f;
     float coolDownTimer = 0f;
 
     void Start (){
@@ -33,17 +33,12 @@ public class Player : MonoBehaviour
     }
 
     public void PlayerAttack(){
-        if (Input.GetMouseButtonDown(0) && (coolDownTimer <= 0)) {
+        if (Input.GetMouseButton(0) && (coolDownTimer <= 0)) {
             // equippedWeapon.Use();
-            Debug.Log("Weapon used");
             coolDownTimer = coolDownMax;
         } else {
             coolDownTimer -= Time.deltaTime;
         }
-    }
-
-    public void DealDamage(Enemy enemy){
-        enemy.TakeDamage(equippedWeapon.Damage, gameObject.transform.position);
     }
     
     public void TakeDamage(int damage){
