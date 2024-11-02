@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -10,6 +12,15 @@ public class Enemy : MonoBehaviour
     float maxHealth;
     float damage;
     int coinsDrop;
+    private float knockbackDuration = 0.2f;
+    private bool isKnockedBack = false;
+    public bool invincible;
+
+    float invincibilityTimer = 1.5f;
+
+    public float damageDealt {
+        get {return damage;}
+    }
 
     public void OnCreated(int wave){
         this.maxHealth = CalculateMaxHealth(wave);
@@ -32,13 +43,41 @@ public class Enemy : MonoBehaviour
         Vector3 movement = relativePosition * speed * Time.deltaTime;
         gameObject.transform.position += movement;
     }
+
+    private IEnumerator KnockBack(Vector3 relativePosition) {
+        isKnockedBack = true;
+        float elapsedTime = 0f;
+        while (elapsedTime < knockbackDuration) {
+            Vector3 knockbackForce = (- relativePosition).normalized * damage/50;
+            Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+            rb.AddForce(knockbackForce, ForceMode2D.Impulse);
+            yield return null;
+        } 
+        isKnockedBack = false;
+    }
+
+    IEnumerator IsHurting() {
+        if (invincible == true) {
+            yield return new WaitForSeconds(invincibilityTimer);
+        }
+        invincible = false;
+    }
+
     public List<Coin> TakeDamage(int damage, Vector3 playerLocation){
         Vector3 enemyPos = gameObject.transform.position;
-        //Vector3 relativePosition = (playerLocation - enemyPos).normalized;
-        //gameObject.transform.position += - relativePosition * damage/100;
-        health -= damage;
+        Vector3 relativePosition = playerLocation - enemyPos;
         List<Coin> coins = new List<Coin>();
-        coins = DispenseCoins(enemyPos);
+
+        if (!isKnockedBack) {
+            StartCoroutine(KnockBack(relativePosition));
+        }
+
+        if (!invincible) {
+            health -= damage;
+            invincible = true;
+            StartCoroutine(IsHurting());
+            coins = DispenseCoins(enemyPos);
+        }
 
         return coins;
     }

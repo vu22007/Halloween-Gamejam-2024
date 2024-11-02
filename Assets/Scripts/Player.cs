@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -16,6 +17,10 @@ public class Player : MonoBehaviour
     float coolDownTimer = 0f;
     public bool dead;
     Camera cam;
+
+    public bool invincible;
+
+    float invincibilityTimer = 1f;
 
     public void PlayerStart(){
         body = GetComponent<Rigidbody2D>();
@@ -55,11 +60,22 @@ public class Player : MonoBehaviour
             return null;
         }
     }
+
+    IEnumerator IsHurting() {
+        if (invincible == true) {
+            yield return new WaitForSeconds(invincibilityTimer);
+        }
+        invincible = false;
+    }
     
     public void TakeDamage(float damage){
-        health -= damage;
-        if(DeadCheck()){
-            dead = true;
+        if (!invincible) {
+            health -= damage;
+            invincible = true;
+            StartCoroutine(IsHurting());
+            if(DeadCheck()){
+                dead = true;
+            }
         }
     }
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,8 +19,15 @@ public class GameController : MonoBehaviour
     bool running;
     List<Coin> coins = new List<Coin>();
 
+    float minDistanceForAttack = 1.0f;
+    private float knockbackDuration;
+    private bool isKnockedBack;
+
+
     void Start()
     {
+        knockbackDuration = 0.2f;
+        isKnockedBack = false;
         player.PlayerStart();
         currentWave = 0;
         enemies = new List<Enemy>();
@@ -38,6 +46,9 @@ public class GameController : MonoBehaviour
             }
             foreach (Enemy enemy in enemies)
             {
+                if (Vector3.Distance(enemy.transform.position, player.transform.position) <= minDistanceForAttack) {
+                    PlayerTakeDamage(enemy.damageDealt, enemy.transform.position);
+                }
                 enemy.EnemyMovement(player.gameObject.transform.position);
             }
             foreach (Bullet bullet in bullets)
@@ -66,18 +77,37 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private IEnumerator KnockBack(Vector3 knockbackForce) {
+        isKnockedBack = true;
+        float elapsedTime = 0f;
+        while (elapsedTime < knockbackDuration) { 
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+            rb.AddForce(knockbackForce, ForceMode2D.Force);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        isKnockedBack = false;
+    }
+
     bool WaveOver(){
         return enemies.Count == 0;
     }
 
-    void PlayerTakeDamage(float amount){
-        player.TakeDamage(amount);
+    void PlayerTakeDamage(float damage, Vector3 enemyPos){
+        if (!isKnockedBack) {
+            Vector3 relativePosition = enemyPos - player.transform.position;
+            Vector3 knockbackForce = (- relativePosition).normalized * damage * 2;
+            StartCoroutine(KnockBack(knockbackForce));
+        }
+        player.TakeDamage(damage);
         if(player.dead){
             GameOver();
         }
     }
 
     void GameOver(){
+        isKnockedBack = false;
         running = false;
         UpdateGameOverText();
         gameOverScreen.SetActive(true);
