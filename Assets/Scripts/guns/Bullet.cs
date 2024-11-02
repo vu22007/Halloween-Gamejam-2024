@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Vector3 direction;
-    float speed = 100f;
+    float speed = 10f;
     Rigidbody2D body;
 
     public void OnCreated(Vector3 startDirection){

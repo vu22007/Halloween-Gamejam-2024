@@ -13,10 +13,12 @@ public class Player : MonoBehaviour
     float moveLimiter = 0.7f;
     float coolDownMax = 2f;
     float coolDownTimer = 0f;
+    Camera cam;
 
     void Start (){
         body = GetComponent<Rigidbody2D>(); 
         equippedGun = new Gun();
+        cam = Camera.main;
     }
 
     public Bullet PlayerUpdate(){
@@ -37,7 +39,9 @@ public class Player : MonoBehaviour
     public Bullet PlayerAttack(){
         if (Input.GetMouseButton(0) && (coolDownTimer <= 0)) {
             coolDownTimer = coolDownMax;
-            Vector3 direction = (Input.mousePosition - gameObject.transform.position).normalized;
+            Vector2 mousePos = Input.mousePosition;
+            Vector3 worldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
+            Vector3 direction = (worldPoint - gameObject.transform.position).normalized;
             return equippedGun.Use(bulletPrefab, gameObject.transform.position, direction);
         } else {
             coolDownTimer -= Time.deltaTime;
