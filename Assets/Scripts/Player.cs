@@ -3,10 +3,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Weapon equippedWeapon;
-    float health;
+    public float health;
     float maxHealth;
     float speed;
     int money;
+    float counPickupDistance;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
 
