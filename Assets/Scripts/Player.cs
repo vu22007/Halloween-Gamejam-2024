@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -5,10 +6,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
     Gun equippedGun;
-    float health;
+    List<PowerUp> powerUps;
+    public float health;
     float maxHealth;
     float speed = 10f;
-    int money;
+    public int money;
     float counPickupDistance;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
@@ -18,13 +20,14 @@ public class Player : MonoBehaviour
     Camera cam;
 
     public void PlayerStart(){
+        powerUps = new List<PowerUp>();
         body = GetComponent<Rigidbody2D>();
         gameObject.transform.position = new Vector3(0f,0f);
         equippedGun = new Gun();
         cam = Camera.main;
         maxHealth = 30f;
         health = maxHealth;
-        money = 0;
+        money = 30;
         dead = false;
     }
 
@@ -63,6 +66,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void AddPowerUp(PowerUp powerUp){
+        powerUps.Add(powerUp);
+        switch (powerUp.Effect)
+        {
+            case "MaxHealth":
+                maxHealth += powerUp.Magnitude;
+                health += powerUp.Magnitude;
+                break;
+            case "Speed":
+                speed += powerUp.Magnitude;
+                break;
+            default:
+                break;
+        }
+    }
+
     public void Heal(int amount){
         health += amount;
         if(health > maxHealth){
@@ -72,6 +91,13 @@ public class Player : MonoBehaviour
 
     public void GetMoney(int amount){
         money += amount;
+    }
+    public bool SpendMoney(int amount){
+        if(money < amount){
+            return false;
+        }
+        money -= amount;
+        return true;
     }
 
     public void IncreaseSpeed(float amount){

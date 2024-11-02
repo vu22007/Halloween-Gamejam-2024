@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] TextMeshProUGUI highscoreText;
+    [SerializeField] PopUpText popUpText;
     List<Enemy> enemies;
     List<Bullet> bullets;
     int highscore;
@@ -20,11 +21,11 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        player.PlayerStart();
-        currentWave = 0;
+        highscore = 0;
         enemies = new List<Enemy>();
         bullets = new List<Bullet>();
-        NewWave();
+        shop.SetupShop();
+        NewGame();
     }
 
     void Update()
@@ -53,6 +54,11 @@ public class GameController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape) && !shop.isUp){
             pauseMenu.SetActive(running);
             running = !running;
+        }
+        //Testing
+        if(Input.GetKeyDown(KeyCode.X) && !shop.isUp){
+            running = false;
+            shop.StartShop();
         }
 
         if (coins != null) {
@@ -87,12 +93,27 @@ public class GameController : MonoBehaviour
         gameOverScreen.SetActive(false);
         player.PlayerStart();
         currentWave = 0;
+        foreach (Enemy enemy in enemies)
+        {
+            Destroy(enemy);
+        }
         enemies = new List<Enemy>();
         NewWave();
     }
 
     public void Quit(){
         Application.Quit();
+    }
+
+    public void Continue(){
+        shop.CloseShop();
+        running = true;
+        NewWave();
+    }
+
+    public void KillEnemy(Enemy enemy){
+        enemies.Remove(enemy);
+        Destroy(enemy);
     }
 
     void NewWave(){
@@ -106,6 +127,7 @@ public class GameController : MonoBehaviour
             enemies.Add(enemy);
         }
         running = true;
+        StartCoroutine(popUpText.QueuePopUp("Wave " + currentWave, 0.1f, Color.white));
     }
 
     void NewHighscoreCheck(){
