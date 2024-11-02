@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     int money;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
+    float coolDownMax = 3f;
+    float coolDownTimer = 0f;
 
     void Start (){
         body = GetComponent<Rigidbody2D>(); 
@@ -17,9 +19,10 @@ public class Player : MonoBehaviour
 
     public void PlayerUpdate(){
         PlayerMovement();
+        PlayerAttack();
     }
 
-    public void PlayerMovement (){
+    public void PlayerMovement(){
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical"); 
         if (horizontal != 0 && vertical != 0) {
@@ -27,6 +30,16 @@ public class Player : MonoBehaviour
             vertical *= moveLimiter;
         }
         body.linearVelocity = new Vector2(horizontal * speed, vertical * speed);
+    }
+
+    public void PlayerAttack(){
+        if (Input.GetMouseButtonDown(0) && (coolDownTimer <= 0)) {
+            equippedWeapon.Use();
+            Debug.Log("Weapon used");
+            coolDownTimer = coolDownMax;
+        } else {
+            coolDownTimer -= Time.deltaTime;
+        }
     }
 
     public void DealDamage(Enemy enemy){

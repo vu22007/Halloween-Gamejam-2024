@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Weapon
+abstract public class Weapon
 {
     SpriteRenderer spriteRenderer;
     int damage;
@@ -8,4 +8,6 @@ public class Weapon
     public int Damage{
         get{return damage;}
     }
+
+    abstract public void Use();
 }
