@@ -5,7 +5,7 @@ using UnityEngine;
 public static class PrefabFactory
 {
 
-    public List<Coin> SpawnCoins(GameObject prefab, Vector3 spawnPosition, int amount) {
+    public static List<Coin> SpawnCoins(GameObject prefab, Vector3 spawnPosition, int amount) {
          List<Coin> coins = new List<Coin>();
             // Instantiate a new sprite at the specified position and default rotation
             for(int i= 0; i < 3; i++) {
@@ -31,7 +31,7 @@ public static class PrefabFactory
     public static Enemy SpawnEnemy(GameObject prefab, Vector3 spawnPosition, int wave){
         GameObject enemy = Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
         Enemy newEnemy = enemy.GetComponent<Enemy>();
-        newEnemy.OnCreated(CalculateMaxHealth(wave), CalculateDamage(wave), CalculateSpeed(wave));
+        newEnemy.OnCreated(wave);
         return newEnemy;
     }
 }
