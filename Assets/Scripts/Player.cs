@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     Weapon equippedWeapon;
+    List<PowerUp> powerUps;
     public float health;
     float maxHealth;
     float speed = 10;
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour
     public bool dead;
 
     public void PlayerStart(){
+        powerUps = new List<PowerUp>();
         body = GetComponent<Rigidbody2D>();
         gameObject.transform.position = new Vector3(0f,0f);
         speed = 10f;
@@ -55,6 +58,10 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void AddPowerUp(PowerUp powerUp){
+        powerUps.Add(powerUp);
+    }
+
     public void Heal(int amount){
         health += amount;
         if(health > maxHealth){
@@ -64,6 +71,13 @@ public class Player : MonoBehaviour
 
     public void GetMoney(int amount){
         money += amount;
+    }
+    public bool SpendMoney(int amount){
+        if(money < amount){
+            return false;
+        }
+        money -= amount;
+        return true;
     }
 
     public void IncreaseSpeed(float amount){

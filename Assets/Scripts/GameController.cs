@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         highscore = 0;
+        shop.SetupShop();
         NewGame();
     }
 
