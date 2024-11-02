@@ -4,10 +4,11 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] Player player;
-    [SerializeField] List<Enemy> enemies;
+    [SerializeField] GameObject enemyPrefab;
     [SerializeField] List<Bullet> bullets;
     [SerializeField] Shop shop;
     [SerializeField] GameObject pauseMenu;
+    List<Enemy> enemies;
     int wave;
     bool running;
 
@@ -15,6 +16,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         wave = 0;
+        enemies = new List<Enemy>();
         NewWave();
     }
 
@@ -49,8 +51,20 @@ public class GameController : MonoBehaviour
 
     void NewWave(){
         wave += 1;
-        //spawn enemies scaling with wave number
+        int randomness = (int)Random.Range(0f, 3f) * wave;
+        int numberEnemies = 5 * wave + randomness;
+        for (int i = 0; i < numberEnemies; i++)
+        {
+            Enemy enemy = PrefabFactory.SpawnEnemy(enemyPrefab, GenerateSpawnLocation(), wave);
+            enemies.Add(enemy);
+        }
         running = true;
+    }
+
+    Vector3 GenerateSpawnLocation(){
+        float randomOne = Random.Range(-10f, 10f);
+        float randomTwo = Random.Range(-10f, 10f);
+        return new Vector3(randomOne,randomTwo);
     }
 
 }

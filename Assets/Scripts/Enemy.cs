@@ -5,10 +5,24 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     SpriteRenderer spriteRenderer;
     public float speed;
-    int health;
-    int maxHealth;
-    int damage;
+    float health;
+    float maxHealth;
+    float damage;
     int coinsDrop;
+
+    public void OnCreated(float maxHealth, float damage, float speed){
+        this.maxHealth = maxHealth;
+        health = maxHealth;
+        this.damage = damage;
+        this.speed = speed;
+        coinsDrop = CalculateCoinsDrop();
+    }
+
+    int CalculateCoinsDrop(){
+        int fromHealth = (int)maxHealth / 10;
+        int fromDamage = (int)damage / 5;
+        return 1 + fromHealth + fromDamage;
+    }
 
     public void EnemyMovement(Vector3 playerLocation){
         //just go towards the player
