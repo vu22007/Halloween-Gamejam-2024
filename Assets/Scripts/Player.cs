@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Bullet bulletPrefab;
+    [SerializeField] GameObject bulletPrefab;
     Gun equippedGun;
     float health;
     float maxHealth;
