@@ -20,4 +20,16 @@ public static class PrefabFactory
             }
             return coins;
     }
+
+    public static Bullet SpawnBullet(Bullet prefab, Vector3 spawnPosition, Vector3 moveDirection){
+        Bullet newBullet = Bullet(Object.Instantiate(prefab, spawnPosition, Quaternion.identity));
+        return newBullet;
+    }
+
+    public static Enemy SpawnEnemy(GameObject prefab, Vector3 spawnPosition, int wave){
+        GameObject enemy = Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
+        Enemy enemyClass = enemy.GetComponent<Enemy>();
+        enemyClass.OnCreated(wave);
+        return enemyClass;
+    }
 }
