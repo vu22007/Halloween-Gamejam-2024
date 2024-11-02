@@ -157,6 +157,7 @@ public class GameController : MonoBehaviour
             enemies.Add(enemy);
         }
         running = true;
+        player.RefreshPlayer();
         StartCoroutine(popUpText.QueuePopUp("Wave " + currentWave, 0.1f, Color.white));
     }
 
