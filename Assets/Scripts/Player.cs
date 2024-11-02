@@ -6,25 +6,27 @@ public class Player : MonoBehaviour
     int maxHealth;
     float speed;
     int money;
+    Rigidbody2D body;
     float horizontal;
     float vertical;
+    float runSpeed = 20f;
     float moveLimiter = 0.7f;
 
     void Start (){
         body = GetComponent<Rigidbody2D>(); 
     }
 
-    void Update (){
+    public void PlayerMovement (){
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical"); 
     }
 
     private void FixedUpdate(){
-        if (horizontal != 0 && vertical != 0) 
+        if (horizontal != 0 && vertical != 0) {
             horizontal *= moveLimiter;
             vertical *= moveLimiter;
         }
-        body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        body.linearVelocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
     }
 
     void TakeDamage(int damage){
