@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] GameObject coins;
+    [SerializeField] GameObject coinPrefab;
     SpriteRenderer spriteRenderer;
     public float speed;
     int health;
@@ -23,8 +23,7 @@ public class Enemy : MonoBehaviour
         gameObject.transform.position += - relativePosition * damage/100;
         health -= damage;
                 if (DeadCheck()){
-            PrefabFactory generate = new PrefabFactory();
-            generate.SpawnCoins(coins, enemyPos, 5);
+            PrefabFactory.SpawnCoins(coinPrefab, enemyPos, 5);
         }
     }
 

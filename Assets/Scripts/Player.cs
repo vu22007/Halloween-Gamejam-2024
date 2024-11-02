@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     void Start (){
         body = GetComponent<Rigidbody2D>(); 
+        speed = 10f;
     }
 
     public void PlayerUpdate(){
