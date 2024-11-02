@@ -5,12 +5,9 @@ public class Player : MonoBehaviour
     Weapon equippedWeapon;
     int health;
     int maxHealth;
-    float speed;
+    public float speed;
     int money;
     Rigidbody2D body;
-    float horizontal;
-    float vertical;
-    float runSpeed = 20f;
     float moveLimiter = 0.7f;
 
     void Start (){
@@ -18,13 +15,13 @@ public class Player : MonoBehaviour
     }
 
     public void PlayerMovement (){
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical"); 
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical"); 
         if (horizontal != 0 && vertical != 0) {
             horizontal *= moveLimiter;
             vertical *= moveLimiter;
         }
-        body.linearVelocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        body.linearVelocity = new Vector2(horizontal * speed, vertical * speed);
     }
 
     public void DealDamage(Enemy enemy){
