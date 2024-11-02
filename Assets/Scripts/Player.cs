@@ -12,10 +12,16 @@ public class Player : MonoBehaviour
     float moveLimiter = 0.7f;
     float coolDownMax = 2f;
     float coolDownTimer = 0f;
+    public bool dead;
 
-    void Start (){
-        body = GetComponent<Rigidbody2D>(); 
+    public void PlayerStart(){
+        body = GetComponent<Rigidbody2D>();
+        gameObject.transform.position = new Vector3(0f,0f);
         speed = 10f;
+        maxHealth = 30f;
+        health = maxHealth;
+        money = 0;
+        dead = false;
     }
 
     public void PlayerUpdate(){
@@ -42,10 +48,10 @@ public class Player : MonoBehaviour
         }
     }
     
-    public void TakeDamage(int damage){
+    public void TakeDamage(float damage){
         health -= damage;
-        if (GameOverCheck()){
-            //game over stuff
+        if(DeadCheck()){
+            dead = true;
         }
     }
 
@@ -60,18 +66,18 @@ public class Player : MonoBehaviour
         money += amount;
     }
 
-    bool GameOverCheck(){
-        if(health <= 0){
-            return true;
-        }
-        return false;
-    }
-
     public void IncreaseSpeed(float amount){
         speed += amount;
     }
 
     public void IncreaseMaxHealth(float amount){
         maxHealth += amount;
+    }
+
+     bool DeadCheck(){
+        if(health <= 0){
+            return true;
+        }
+        return false;
     }
 }
