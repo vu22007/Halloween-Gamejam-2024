@@ -3,9 +3,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     Weapon equippedWeapon;
-    int health;
-    int maxHealth;
-    public float speed;
+    float health;
+    float maxHealth;
+    float speed;
     int money;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
@@ -55,5 +55,13 @@ public class Player : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public void IncreaseSpeed(float amount){
+        speed += amount;
+    }
+
+    public void IncreaseMaxHealth(float amount){
+        maxHealth += amount;
     }
 }

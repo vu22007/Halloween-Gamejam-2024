@@ -2,7 +2,7 @@ using UnityEngine;
 
 abstract public class SpeedUp : StatUp
 {
-    void apply(Player player){
-      player.speed += magnitude;
+    void Apply(Player player){
+      player.IncreaseSpeed(magnitude);
     }
 }
