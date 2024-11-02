@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     List<Enemy> enemies;
     int wave;
     bool running;
+    List<Coin> coins = new List<Coin>();
 
 
     void Start()
@@ -21,6 +22,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+
         if(running){
             player.PlayerMovement();
             foreach (Enemy enemy in enemies)
@@ -37,7 +39,16 @@ public class GameController : MonoBehaviour
             pauseMenu.SetActive(running);
             running = !running;
         }
-        
+
+        if (coins != null) {
+            for (int i = coins.Count - 1; i >= 0; i--) {
+                Coin coin = coins[i];
+                bool coin_destroyed = coin.DestroyCoin(player);
+                if (coin_destroyed) {
+                    coins.RemoveAt(i);
+                }
+            }
+        }
     }
 
     bool WaveOver(){
