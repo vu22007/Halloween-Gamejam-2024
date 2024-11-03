@@ -19,8 +19,12 @@ public class Enemy : MonoBehaviour
 
     float invincibilityTimer = 0.25f;
 
-    public float damageDealt {
+    public float Damage {
         get {return damage;}
+    }
+
+    public float Health {
+        get {return health;}
     }
 
     public void OnCreated(int wave){

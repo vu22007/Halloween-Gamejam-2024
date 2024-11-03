@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour
                     KillEnemy(enemy);
                 }
                 if (Vector3.Distance(enemy.transform.position, player.transform.position) <= minDistanceForAttack){
-                    PlayerTakeDamage(enemy.damageDealt, enemy.transform.position);
+                    PlayerTakeDamage(enemy.Damage, enemy.transform.position);
                 }
                 enemy.EnemyMovement(player.gameObject.transform.position);
             }
@@ -69,8 +69,11 @@ public class GameController : MonoBehaviour
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
             foreach (GameObject bullet in bullets) {
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
+                if (bulletScript == null){
+                    continue;
+                }
                 bulletScript.BulletUpdate();
-                if (CheckObjectOutsideScreen(bullet)){
+                if (CheckObjectOutsideScreen(bullet) || bulletScript.CheckDead()){
                     Destroy(bullet);
                 }
             }

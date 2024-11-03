@@ -11,16 +11,24 @@ public class Bullet : MonoBehaviour
         velocity = startDirection * speed;
         velocity.z = 0;
         health = bulletHealth;
-        Debug.Log(velocity);
     }
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Enemy")) {
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null) {
-                enemy.TakeDamage(health, enemy.transform.position - gameObject.transform.position);
-                Destroy(gameObject);
+                float damageTaken = Mathf.Max(health, enemy.Health);
+                enemy.TakeDamage(damageTaken, enemy.transform.position - gameObject.transform.position);
+                health -= damageTaken;
             }
+        }
+    }
+
+    public bool CheckDead() {
+        if (health <= 0){
+            return true;
+        } else {
+            return false;
         }
     }
 
