@@ -58,6 +58,11 @@ public class Player : MonoBehaviour
         get {return equippedGun;}
     }
 
+    public void RefreshPlayer(){
+        Heal(20f);
+        gameObject.transform.position = new Vector3(0f,0f);
+    }
+
     public Bullet PlayerUpdate(){
         PlayerMovement();
         CheckPlayerBordered();
@@ -72,6 +77,11 @@ public class Player : MonoBehaviour
             vertical *= moveLimiter;
         }
         body.linearVelocity = new Vector2(horizontal * speed, vertical * speed);
+        Vector2 mousePos = Input.mousePosition;
+        Vector3 worldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
+        Vector3 direction = (worldPoint - gameObject.transform.position).normalized;
+        Quaternion wantedRotation = Quaternion.LookRotation(transform.forward, direction);
+        gameObject.transform.rotation = wantedRotation;
     }
 
     public Bullet PlayerAttack(){
@@ -147,7 +157,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Heal(int amount){
+    public void Heal(float amount){
         health += amount;
         if(health > maxHealth){
             health = maxHealth;

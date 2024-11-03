@@ -133,7 +133,7 @@ public class GameController : MonoBehaviour
 
     public void KillEnemy(Enemy enemy){
         enemies.Remove(enemy);
-        Destroy(enemy);
+        Destroy(enemy.gameObject);
     }
 
     void NewWave(){
@@ -147,6 +147,7 @@ public class GameController : MonoBehaviour
             enemies.Add(enemy);
         }
         running = true;
+        player.RefreshPlayer();
         StartCoroutine(popUpText.QueuePopUp("Wave " + currentWave, 0.1f, Color.white));
     }
 
