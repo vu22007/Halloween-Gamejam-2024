@@ -14,24 +14,21 @@ public class GameController : MonoBehaviour
     [SerializeField] TextMeshProUGUI highscoreText;
     [SerializeField] PopUpText popUpText;
     List<Enemy> enemies;
-    List<Bullet> bullets;
+    GameObject[] bullets;
     int highscore;
     int currentWave;
     bool running;
-    List<Coin> coins = new List<Coin>();
 
     float minDistanceForAttack = 1.0f;
-    private float knockbackDuration;
-    private bool isKnockedBack;
+    private float knockbackDuration = 0.2f;
+    private bool isKnockedBack = false;
 
 
     void Start()
     {
         highscore = 0;
-        knockbackDuration = 0.2f;
         isKnockedBack = false;
         enemies = new List<Enemy>();
-        bullets = new List<Bullet>();
         shop.SetupShop();
         NewGame();
     }
@@ -39,11 +36,10 @@ public class GameController : MonoBehaviour
     void Update()
     {
 
-
         if(running){
             Bullet newBullet = player.PlayerUpdate();
             if (newBullet != null) {
-                bullets.Add(newBullet);
+                newBullet.SetDamage(player.getGun.Damage);
             }
             foreach (Enemy enemy in enemies)
             {
@@ -52,9 +48,13 @@ public class GameController : MonoBehaviour
                 }
                 enemy.EnemyMovement(player.gameObject.transform.position);
             }
-            foreach (Bullet bullet in bullets)
-            {
-                bullet.BulletUpdate();
+            
+            bullets = GameObject.FindGameObjectsWithTag("Bullet");
+            foreach (GameObject bullet in bullets) {
+                Bullet bulletScript = bullet.GetComponent<Bullet>();
+                if (bulletScript != null) {
+                    bulletScript.BulletUpdate();
+                }
             }
             if(WaveOver()){
                 running = false;
@@ -70,16 +70,6 @@ public class GameController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.X) && !shop.isUp){
             running = false;
             shop.StartShop();
-        }
-
-        if (coins != null) {
-            for (int i = coins.Count - 1; i >= 0; i--) {
-                Coin coin = coins[i];
-                bool coin_destroyed = coin.DestroyCoin(player);
-                if (coin_destroyed) {
-                    coins.RemoveAt(i);
-                }
-            }
         }
     }
 

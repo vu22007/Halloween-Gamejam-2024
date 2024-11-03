@@ -21,11 +21,12 @@ public class Player : MonoBehaviour
 
     public bool invincible;
 
-    float invincibilityTimer = 1f;
+    float invincibilityTimer = 0.5f;
 
     public void PlayerStart(){
         powerUps = new List<PowerUp>();
         body = GetComponent<Rigidbody2D>();
+        body.constraints = RigidbodyConstraints2D.None;
         gameObject.transform.position = new Vector3(0f,0f);
         equippedGun = new Gun();
         cam = Camera.main;
@@ -33,6 +34,21 @@ public class Player : MonoBehaviour
         health = maxHealth;
         money = 30;
         dead = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Coin")) {
+            Coin coin = other.GetComponent<Coin>();
+            if (coin != null) {
+                this.GetMoney(1);
+                Debug.Log(this.money);
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
+    public Gun getGun{
+        get {return equippedGun;}
     }
 
     public Bullet PlayerUpdate(){

@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     private bool isKnockedBack = false;
     public bool invincible;
 
-    float invincibilityTimer = 1.5f;
+    float invincibilityTimer = 0.25f;
 
     public float damageDealt {
         get {return damage;}
@@ -38,21 +38,21 @@ public class Enemy : MonoBehaviour
 
     public void EnemyMovement(Vector3 playerLocation){
         //just go towards the player
-        Vector3 enemyPos = gameObject.transform.position;
-        Vector3 relativePosition = (playerLocation - enemyPos).normalized;
-        Vector3 movement = relativePosition * speed * Time.deltaTime;
-        gameObject.transform.position += movement;
+        if (!isKnockedBack) {
+            Vector3 enemyPos = gameObject.transform.position;
+            Vector3 relativePosition = (playerLocation - enemyPos).normalized;
+            Vector3 movement = relativePosition * speed * Time.deltaTime;
+            gameObject.transform.position += movement;
+        }
     }
 
-    private IEnumerator KnockBack(Vector3 relativePosition) {
+    private IEnumerator KnockBack(Vector3 bulletDirection) {
         isKnockedBack = true;
-        float elapsedTime = 0f;
-        while (elapsedTime < knockbackDuration) {
-            Vector3 knockbackForce = (- relativePosition).normalized * damage/50;
-            Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-            rb.AddForce(knockbackForce, ForceMode2D.Impulse);
-            yield return null;
-        } 
+        Vector3 knockbackForce = bulletDirection.normalized * damage*100;
+        Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
+        rb.AddForce(knockbackForce, ForceMode2D.Force);
+        yield return new WaitForSeconds(knockbackDuration);
+        rb.linearVelocity = Vector3.zero;
         isKnockedBack = false;
     }
 
@@ -63,31 +63,25 @@ public class Enemy : MonoBehaviour
         invincible = false;
     }
 
-    public List<Coin> TakeDamage(int damage, Vector3 playerLocation){
+    public void TakeDamage(int damage, Vector3 bulletDirection){
         Vector3 enemyPos = gameObject.transform.position;
-        Vector3 relativePosition = playerLocation - enemyPos;
-        List<Coin> coins = new List<Coin>();
 
         if (!isKnockedBack) {
-            StartCoroutine(KnockBack(relativePosition));
+            StartCoroutine(KnockBack(bulletDirection));
         }
 
         if (!invincible) {
             health -= damage;
             invincible = true;
             StartCoroutine(IsHurting());
-            coins = DispenseCoins(enemyPos);
+            DispenseCoins(enemyPos);
         }
-
-        return coins;
     }
 
-    public List<Coin> DispenseCoins(Vector3 enemyPos){
-        List<Coin> coins = new List<Coin>();
+    public void DispenseCoins(Vector3 enemyPos){
         if (DeadCheck()){
-            coins = PrefabFactory.SpawnCoins(coinPrefab, enemyPos, coinsDrop);
+            PrefabFactory.SpawnCoins(coinPrefab, enemyPos, coinsDrop);
         }
-        return coins;
     }
 
     bool DeadCheck(){
