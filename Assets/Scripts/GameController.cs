@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
             }
             if(WaveOver()){
                 running = false;
-                shop.StartShop();
+                shop.StartShop(currentWave);
             }
             
         }
@@ -73,7 +73,7 @@ public class GameController : MonoBehaviour
         //Testing
         if(Input.GetKeyDown(KeyCode.X) && !shop.isUp){
             running = false;
-            shop.StartShop();
+            shop.StartShop(currentWave);
         }
     }
 

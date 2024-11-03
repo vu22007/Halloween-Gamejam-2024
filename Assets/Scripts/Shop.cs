@@ -10,6 +10,7 @@ public class Shop : MonoBehaviour
     [SerializeField] GameObject shopInterface;
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] Player player;
+    int wave;
 
 
     public bool isUp = false;
@@ -21,7 +22,8 @@ public class Shop : MonoBehaviour
             shopPlacesButtons[i].SetActive(true);
         }
     }
-    public void StartShop(){
+    public void StartShop(int wave){
+        this.wave = wave;
         UpdateMoneyText();
         shopInterface.SetActive(true);
         isUp = true;
@@ -36,6 +38,13 @@ public class Shop : MonoBehaviour
         PowerUp item = powerups[index];
         if(player.SpendMoney(item.Price)){
             player.AddPowerUp(item);
+            UpdateMoneyText();
+        }
+    }
+
+    public void BuyGun(){
+        if(player.SpendMoney(50)){
+            player.EquipNewGun(new Gun(wave));
             UpdateMoneyText();
         }
     }
