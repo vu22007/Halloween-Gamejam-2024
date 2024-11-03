@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
             Coin coin = other.GetComponent<Coin>();
             if (coin != null) {
                 this.GetMoney(1);
-                Debug.Log(this.money);
                 Destroy(other.gameObject);
             }
         }
