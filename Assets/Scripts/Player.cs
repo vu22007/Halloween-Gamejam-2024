@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     float counPickupDistance;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
-    public float attackCoolDownMax = 2f;
+    public float attackCoolDownMax = 1.5f;
     float attackCoolDownTimer = 0f;
     public bool dead;
     Camera cam;
