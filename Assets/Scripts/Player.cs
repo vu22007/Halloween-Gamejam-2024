@@ -68,13 +68,13 @@ public class Player : MonoBehaviour
         gameObject.transform.position = new Vector3(0f,0f);
     }
 
-    public Bullet PlayerUpdate(){
+    public void PlayerUpdate(){
         PlayerMovement();
         CheckPlayerBordered();
-        return PlayerAttack();
+        PlayerAttack();
     }
 
-    public void PlayerMovement(){
+    void PlayerMovement(){
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical"); 
         if (horizontal != 0 && vertical != 0) {
@@ -89,20 +89,19 @@ public class Player : MonoBehaviour
         gameObject.transform.rotation = wantedRotation;
     }
 
-    public Bullet PlayerAttack(){
+    void PlayerAttack(){
         if (Input.GetMouseButton(0) && (attackCoolDownTimer <= 0)) {
             attackCoolDownTimer = attackCoolDownMax / equippedGun.GetFireRateMultiplier();
             Vector2 mousePos = Input.mousePosition;
             Vector3 worldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
             Vector3 direction = (worldPoint - gameObject.transform.position).normalized;
-            return equippedGun.Use(bulletPrefab, gameObject.transform.position, direction, damage, bulletSpeed);
+            equippedGun.Use(bulletPrefab, gameObject.transform.position, direction, damage, bulletSpeed);
         } else {
             attackCoolDownTimer -= Time.deltaTime;
-            return null;
         }
     }
 
-    private void CheckPlayerBordered(){
+    void CheckPlayerBordered(){
         float spriteLeft   = transform.position.x - spriteHalfSize.x;
         float spriteRight  = transform.position.x + spriteHalfSize.x;
         float spriteBottom = transform.position.y - spriteHalfSize.y;

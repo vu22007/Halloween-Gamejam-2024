@@ -40,7 +40,7 @@ public class GameController : MonoBehaviour
     {
 
         if(running){
-            Bullet newBullet = player.PlayerUpdate();
+            player.PlayerUpdate();
             foreach (Enemy enemy in enemies)
             {
                 if(enemy.dead){
