@@ -43,6 +43,9 @@ public class GameController : MonoBehaviour
             }
             foreach (Enemy enemy in enemies)
             {
+                if(enemy.dead){
+                    KillEnemy(enemy);
+                }
                 if (Vector3.Distance(enemy.transform.position, player.transform.position) <= minDistanceForAttack) {
                     PlayerTakeDamage(enemy.damageDealt, enemy.transform.position);
                 }

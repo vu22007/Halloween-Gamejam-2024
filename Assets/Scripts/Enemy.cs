@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
     public bool invincible;
+    public bool dead;
 
     float invincibilityTimer = 0.25f;
 
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
         this.damage = CalculateDamage(wave);
         this.speed = CalculateSpeed(wave);
         coinsDrop = CalculateCoinsDrop();
+        dead = false;
     }
 
     int CalculateCoinsDrop(){
@@ -88,6 +90,7 @@ public class Enemy : MonoBehaviour
 
     bool DeadCheck(){
         if(health <= 0){
+            dead = true;
             return true;
         }
         return false;
