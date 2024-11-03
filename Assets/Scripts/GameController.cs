@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     [SerializeField] Player player;
+    [SerializeField] HealthBar healthBar;
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Shop shop;
     [SerializeField] GameObject pauseMenu;
@@ -35,6 +36,7 @@ public class GameController : MonoBehaviour
         isKnockedBack = false;
         enemies = new List<Enemy>();
         shop.SetupShop();
+        healthBar.UpdatePlayerHealthBar();
         NewGame();
     }
 
@@ -92,6 +94,7 @@ public class GameController : MonoBehaviour
     }
 
     void PlayerTakeDamage(float damage, Vector3 enemyPos){
+        healthBar.UpdatePlayerHealthBar();
         if (!isKnockedBack) {
             Vector3 relativePosition = enemyPos - player.transform.position;
             Vector3 knockbackForce = (- relativePosition).normalized * damage * 2;
@@ -154,6 +157,7 @@ public class GameController : MonoBehaviour
         }
         running = true;
         player.RefreshPlayer();
+        healthBar.UpdatePlayerHealthBar();
         StartCoroutine(popUpText.QueuePopUp("Wave " + currentWave, 0.1f, Color.white));
     }
 
