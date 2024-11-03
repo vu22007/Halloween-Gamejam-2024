@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] TextMeshProUGUI highscoreText;
     [SerializeField] PopUpText popUpText;
+    [SerializeField] private AudioClip playerDamage;
     List<Enemy> enemies;
     GameObject[] bullets;
     int highscore;
@@ -98,6 +99,7 @@ public class GameController : MonoBehaviour
         if (!isKnockedBack) {
             Vector3 relativePosition = enemyPos - player.transform.position;
             Vector3 knockbackForce = (- relativePosition).normalized * damage * 2;
+            SFXPlaying.instance.playSFXCllip(playerDamage, transform, 1f);
             StartCoroutine(KnockBack(knockbackForce));
         }
         player.TakeDamage(damage);

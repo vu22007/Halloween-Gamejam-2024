@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject coinPrefab;
+    [SerializeField] private AudioClip zombiesDie;
     SpriteRenderer spriteRenderer;
     public float speed;
     float health;
@@ -85,6 +86,7 @@ public class Enemy : MonoBehaviour
     public void DispenseCoins(Vector3 enemyPos){
         if (DeadCheck()){
             PrefabFactory.SpawnCoins(coinPrefab, enemyPos, coinsDrop);
+            SFXPlaying.instance.playSFXCllip(zombiesDie, transform, 1f);
         }
     }
 
