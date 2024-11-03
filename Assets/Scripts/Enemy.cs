@@ -43,13 +43,9 @@ public class Enemy : MonoBehaviour
             Vector3 relativePosition = (playerLocation - enemyPos).normalized;
             Vector3 movement = relativePosition * speed * Time.deltaTime;
             gameObject.transform.position += movement;
-        }
-        Vector3 enemyPos = gameObject.transform.position;
-        Vector3 relativePosition = (playerLocation - enemyPos).normalized;
-        Vector3 movement = relativePosition * speed * Time.deltaTime;
-        gameObject.transform.position += movement;
-        Quaternion wantedRotation = Quaternion.LookRotation(transform.forward, relativePosition);
-        gameObject.transform.rotation = wantedRotation;
+            Quaternion wantedRotation = Quaternion.LookRotation(transform.forward, relativePosition);
+            gameObject.transform.rotation = wantedRotation;
+        }  
     }
 
     private IEnumerator KnockBack(Vector3 bulletDirection) {
