@@ -15,7 +15,7 @@ public class Stats : MonoBehaviour
     public void UpdateTexts(){
         maxHealthText.text = "max health: " + player.maxHealth;
         speedText.text = "speed: " + player.speed;
-        damageText.text = "damage: " + (player.damage * player.equippedGun.damageWeighting);
-        fireRateText.text = "fire rate: " + (player.attackCoolDownMax / player.equippedGun.fireRateWeighting) + "s";
+        damageText.text = "damage: " + (player.damage * player.equippedGun.damageMultiplier);
+        fireRateText.text = "fire rate: " + (player.attackCoolDownMax / player.equippedGun.fireRateMultiplier) + "s";
     }
 }
