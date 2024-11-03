@@ -22,10 +22,14 @@ public class GameController : MonoBehaviour
     float minDistanceForAttack = 1.0f;
     private float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
+    Vector2 screenLeftBottom;
+    Vector2 screenTopRight;
 
 
     void Start()
     {
+        screenLeftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
+        screenTopRight = Camera.main.ViewportToWorldPoint(Vector3.one);
         highscore = 0;
         isKnockedBack = false;
         enemies = new List<Enemy>();
@@ -111,7 +115,7 @@ public class GameController : MonoBehaviour
 
     public void NewGame(){
         gameOverScreen.SetActive(false);
-        player.PlayerStart();
+        player.PlayerStart(screenLeftBottom, screenTopRight);
         currentWave = 0;
         foreach (Enemy enemy in enemies)
         {
