@@ -23,7 +23,8 @@ public class GameController : MonoBehaviour
     private bool isKnockedBack = false;
     Vector2 screenLeftBottom;
     Vector2 screenTopRight;
-
+    public float enemySpawnDistanceMin = 0f;
+    public float enemySpawnDistanceMax = 5f;
 
     void Start()
     {
@@ -169,21 +170,21 @@ public class GameController : MonoBehaviour
         if (spawnSide <= 3) {
             // Spawn on top
             float xCoord = Random.Range(screenLeftBottom.x, screenTopRight.x);
-            float yCoord = screenTopRight.y + 20f;
+            float yCoord = screenTopRight.y + Random.Range(enemySpawnDistanceMin, enemySpawnDistanceMax);
             return new Vector3(xCoord, yCoord);
         } else if (spawnSide <= 6) {
             // Spawn on bottom
             float xCoord = Random.Range(screenLeftBottom.x, screenTopRight.x);
-            float yCoord = screenLeftBottom.y - 20f;
+            float yCoord = screenLeftBottom.y - Random.Range(enemySpawnDistanceMin, enemySpawnDistanceMax);
             return new Vector3(xCoord, yCoord);
         } else if (spawnSide <= 8) {
             // Spawn on left
-            float xCoord = screenLeftBottom.x - 20f;
+            float xCoord = screenLeftBottom.x - Random.Range(enemySpawnDistanceMin, enemySpawnDistanceMax);
             float yCoord = Random.Range(screenLeftBottom.y, screenTopRight.y);
             return new Vector3(xCoord, yCoord);
         } else {
             // Spawn on right
-            float xCoord = screenTopRight.x + 20f;
+            float xCoord = screenTopRight.x + Random.Range(enemySpawnDistanceMin, enemySpawnDistanceMax);
             float yCoord = Random.Range(screenLeftBottom.y, screenTopRight.y);
             return new Vector3(xCoord, yCoord);
         }
