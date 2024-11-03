@@ -161,6 +161,7 @@ public class GameController : MonoBehaviour
         running = true;
         player.RefreshPlayer();
         healthBar.UpdatePlayerHealthBar();
+        StartCoroutine(popUpText.QueuePopUp("Welcome to Apocalypse Hero!!!", 0.07f, Color.red));
         StartCoroutine(popUpText.QueuePopUp("Wave " + currentWave, 0.1f, Color.white));
     }
 
