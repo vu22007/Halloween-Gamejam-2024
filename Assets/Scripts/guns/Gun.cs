@@ -3,7 +3,9 @@ using UnityEngine;
 public class Gun
 {
     SpriteRenderer spriteRenderer;
-    int damage;
+
+    //TODO: Hardcoded Damage. Set to a variable value depending on Gun strenth
+    int damage = 15;
 
     public int Damage{
         get{return damage;}

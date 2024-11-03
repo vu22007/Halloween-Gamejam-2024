@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public bool dead;
     Camera cam;
     public bool invincible;
-    float invincibilityTimer = 1f;
+    float invincibilityTimer = 0.5f;
     private Vector2 leftBottom;
     private Vector2 rightTop;
     private SpriteRenderer spriteRenderer;
@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     public void PlayerStart(){
         powerUps = new List<PowerUp>();
         body = GetComponent<Rigidbody2D>();
+        body.constraints = RigidbodyConstraints2D.None;
         gameObject.transform.position = new Vector3(0f,0f);
         equippedGun = new Gun();
         cam = Camera.main;
@@ -41,6 +42,20 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteSize     = spriteRenderer.sprite.bounds.size;
         spriteHalfSize = spriteRenderer.sprite.bounds.extents;
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Coin")) {
+            Coin coin = other.GetComponent<Coin>();
+            if (coin != null) {
+                this.GetMoney(1);
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
+    public Gun getGun{
+        get {return equippedGun;}
     }
 
     public Bullet PlayerUpdate(){
@@ -110,6 +125,7 @@ public class Player : MonoBehaviour
             invincible = true;
             StartCoroutine(IsHurting());
             if(DeadCheck()){
+                body.constraints = RigidbodyConstraints2D.FreezePosition | RigidbodyConstraints2D.FreezeRotation;
                 dead = true;
             }
         }
