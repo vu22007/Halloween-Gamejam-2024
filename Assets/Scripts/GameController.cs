@@ -143,7 +143,7 @@ public class GameController : MonoBehaviour
 
     public void KillEnemy(Enemy enemy){
         enemies.Remove(enemy);
-        Destroy(enemy);
+        Destroy(enemy.gameObject);
     }
 
     void NewWave(){
