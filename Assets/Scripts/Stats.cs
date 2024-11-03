@@ -9,10 +9,13 @@ public class Stats : MonoBehaviour
     [SerializeField] TextMeshProUGUI speedText;
 
     [SerializeField] TextMeshProUGUI damageText;
+    [SerializeField] TextMeshProUGUI fireRateText;
+
     
     public void UpdateTexts(){
         maxHealthText.text = "max health: " + player.maxHealth;
         speedText.text = "speed: " + player.speed;
-        damageText.text = "damage: " + player.damage * player.equippedGun.damageWeighting;
+        damageText.text = "damage: " + (player.damage * player.equippedGun.damageWeighting);
+        fireRateText.text = "fire rate: " + (player.attackCoolDownMax / player.equippedGun.fireRateWeighting) + "s";
     }
 }
