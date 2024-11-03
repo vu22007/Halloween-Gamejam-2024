@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour
     [SerializeField] TextMeshProUGUI highscoreText;
     [SerializeField] PopUpText popUpText;
     List<Enemy> enemies;
-    GameObject[] bullets;
     int highscore;
     int currentWave;
     bool running;
@@ -37,7 +36,7 @@ public class GameController : MonoBehaviour
         NewGame();
     }
 
-    private bool checkObjectOutsideScreen(GameObject gameObject){
+    private bool CheckObjectOutsideScreen(GameObject gameObject){
         if ((gameObject.transform.position.x < screenLeftBottom.x - 1) ||
             (gameObject.transform.position.x > screenTopRight.x + 1) ||
             (gameObject.transform.position.y < screenLeftBottom.y - 1) ||
@@ -64,10 +63,11 @@ public class GameController : MonoBehaviour
                 enemy.EnemyMovement(player.gameObject.transform.position);
             }
             
-            bullets = GameObject.FindGameObjectsWithTag("Bullet");
+            GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
             foreach (GameObject bullet in bullets) {
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
-                if (checkObjectOutsideScreen(bullet)){
+                bulletScript.BulletUpdate();
+                if (CheckObjectOutsideScreen(bullet)){
                     Destroy(bullet);
                 }
             }
