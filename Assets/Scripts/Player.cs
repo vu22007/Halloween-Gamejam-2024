@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] private AudioClip coinCollect;
+    [SerializeField] private AudioClip playerShoot;
     public Gun equippedGun;
     List<PowerUp> powerUps;
     public float health;
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Coin")) {
             Coin coin = other.GetComponent<Coin>();
             if (coin != null) {
+                SFXPlaying.instance.playSFXCllip(coinCollect, transform, 1f);
                 this.GetMoney(1);
                 Destroy(other.gameObject);
             }
@@ -100,6 +103,7 @@ public class Player : MonoBehaviour
             Vector3 worldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
             Vector3 direction = (worldPoint - gameObject.transform.position).normalized;
             equippedGun.Use(bulletPrefab, gameObject.transform.position, direction, damage, bulletSpeed);
+            SFXPlaying.instance.playSFXCllip(playerShoot, transform, 1f);
         } else {
             attackCoolDownTimer -= Time.deltaTime;
         }
@@ -139,6 +143,7 @@ public class Player : MonoBehaviour
     
     public void TakeDamage(float damage){
         if (!invincible) {
+            
             health -= damage;
             invincible = true;
             StartCoroutine(IsHurting());
