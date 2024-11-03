@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
     {
 
         if(running){
-            Bullet newBullet = player.PlayerUpdate();
+            player.PlayerUpdate();
             foreach (Enemy enemy in enemies)
             {
                 if(enemy.dead){
@@ -117,6 +117,11 @@ public class GameController : MonoBehaviour
         gameOverScreen.SetActive(false);
         player.PlayerStart(screenLeftBottom, screenTopRight);
         currentWave = 0;
+        GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
+        foreach (GameObject coin in coins)
+        {
+            Destroy(coin);
+        }
         foreach (Enemy enemy in enemies)
         {
             Destroy(enemy.gameObject);

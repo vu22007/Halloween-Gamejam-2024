@@ -34,7 +34,7 @@ public class Gun
         bulletSpeedMultiplier = Mathf.Min(possibleBulletSpeedMultiplier, maxBulletSpeedMultiplier);
     }
 
-    public Bullet Use(GameObject bulletSprite, Vector3 playerPosition, Vector3 attackDirection, float bulletHealth, float bulletSpeed){
-        return PrefabFactory.SpawnBullet(bulletSprite, playerPosition, attackDirection, bulletHealth * damageMultiplier, bulletSpeed * bulletSpeedMultiplier);
+    public void Use(GameObject bulletSprite, Vector3 playerPosition, Vector3 attackDirection, float bulletHealth, float bulletSpeed){
+        PrefabFactory.SpawnBullet(bulletSprite, playerPosition, attackDirection, bulletHealth * damageMultiplier, bulletSpeed * bulletSpeedMultiplier);
     }
 }
