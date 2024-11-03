@@ -55,8 +55,9 @@ public class GameController : MonoBehaviour
 
         if(running){
             player.PlayerUpdate();
-            foreach (Enemy enemy in enemies)
+            for (int i = 0; i < enemies.Count; i++)
             {
+                Enemy enemy = enemies[i];
                 if(enemy.dead){
                     KillEnemy(enemy);
                 }
@@ -79,6 +80,7 @@ public class GameController : MonoBehaviour
             }
             if(WaveOver()){
                 running = false;
+                healthBar.gameObject.SetActive(false);
                 shop.StartShop(currentWave);
             }
             
@@ -150,6 +152,7 @@ public class GameController : MonoBehaviour
 
     public void Continue(){
         shop.CloseShop();
+        healthBar.gameObject.SetActive(true);
         running = true;
         NewWave();
     }
@@ -172,6 +175,7 @@ public class GameController : MonoBehaviour
         running = true;
         player.RefreshPlayer();
         healthBar.UpdatePlayerHealthBar();
+        StartCoroutine(popUpText.QueuePopUp("Welcome to Apocalypse Hero!!!", 0.07f, Color.red));
         StartCoroutine(popUpText.QueuePopUp("Wave " + currentWave, 0.1f, Color.white));
     }
 

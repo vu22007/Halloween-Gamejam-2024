@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
-    Gun equippedGun;
+    public Gun equippedGun;
     List<PowerUp> powerUps;
     public float health;
     public float maxHealth;
@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     float counPickupDistance;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
-    float attackCoolDownMax = 2f;
+    public float attackCoolDownMax = 2f;
     float attackCoolDownTimer = 0f;
     public bool dead;
     Camera cam;

@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
         velocity = startDirection * speed;
         velocity.z = 0;
         health = bulletHealth;
+        Debug.Log(velocity);
     }
 
     void OnTriggerEnter2D(Collider2D other) {

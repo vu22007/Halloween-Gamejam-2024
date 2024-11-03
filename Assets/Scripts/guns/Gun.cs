@@ -3,14 +3,14 @@ using UnityEngine;
 public class Gun
 {
     SpriteRenderer spriteRenderer;
-    public float damageWeighting = 0.1f;
-    public float fireRateWeighting = 0.1f;
-    public float bulletSpeedWeighting = 0.1f;
+    float damageWeighting = 0.1f;
+    float fireRateWeighting = 0.1f;
+    float bulletSpeedWeighting = 0.1f;
     public float maxDamageMultiplier = 10f;
     public float maxFireRateMultiplier = 10f;
     public float maxBulletSpeedMultiplier = 10f;
-    float damageMultiplier;
-    float fireRateMultiplier;
+    public float damageMultiplier;
+    public float fireRateMultiplier;
     float bulletSpeedMultiplier;
 
     public float GetDamageMultiplier(){
@@ -26,11 +26,11 @@ public class Gun
     }
 
     public Gun(int wave){
-        float possibleDamageMultiplier = 1 + damageWeighting * Random.Range(1, wave + 1);
+        float possibleDamageMultiplier = 1f + (damageWeighting * Random.Range(1, wave + 1));
         damageMultiplier = Mathf.Min(possibleDamageMultiplier, maxDamageMultiplier);
-        float possibleFireRateMultiplier = 1 + fireRateWeighting * Random.Range(1, wave + 1);
+        float possibleFireRateMultiplier = 1f + (fireRateWeighting * Random.Range(1, wave + 1));
         fireRateMultiplier = Mathf.Min(possibleFireRateMultiplier, maxFireRateMultiplier);
-        float possibleBulletSpeedMultiplier = 1 + bulletSpeedWeighting * Random.Range(1, wave + 1);
+        float possibleBulletSpeedMultiplier = 1f + (bulletSpeedWeighting * Random.Range(1, wave + 1));
         bulletSpeedMultiplier = Mathf.Min(possibleBulletSpeedMultiplier, maxBulletSpeedMultiplier);
     }
 
