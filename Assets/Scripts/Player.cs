@@ -20,15 +20,15 @@ public class Player : MonoBehaviour
     Camera cam;
     public bool invincible;
     float invincibilityTimer = 0.5f;
-    Vector2 leftBottom;
-    Vector2 rightTop;
+    Vector2 screenLeftBottom;
+    Vector2 screenTopRight;
     SpriteRenderer spriteRenderer;
     Vector2 spriteSize;
     Vector2 spriteHalfSize;
     float damage;
     float bulletSpeed;
 
-    public void PlayerStart(){
+    public void PlayerStart(Vector2 leftBottom, Vector2 topRight){
         powerUps = new List<PowerUp>();
         body = GetComponent<Rigidbody2D>();
         body.constraints = RigidbodyConstraints2D.None;
@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
         dead = false;
         damage = 10f;
         bulletSpeed = 30f;
-        leftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
-        rightTop = Camera.main.ViewportToWorldPoint(Vector3.one);
+        screenLeftBottom = leftBottom;
+        screenTopRight = topRight;
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteSize     = spriteRenderer.sprite.bounds.size;
         spriteHalfSize = spriteRenderer.sprite.bounds.extents;
@@ -108,21 +108,21 @@ public class Player : MonoBehaviour
         float spriteBottom = transform.position.y - spriteHalfSize.y;
         float spriteTop    = transform.position.y + spriteHalfSize.y;
         Vector3 clampedPosition = transform.position;
-        if(spriteLeft < leftBottom.x)
+        if(spriteLeft < screenLeftBottom.x)
         {
-            clampedPosition.x = leftBottom.x + spriteHalfSize.x;
+            clampedPosition.x = screenLeftBottom.x + spriteHalfSize.x;
         }
-        else if(spriteRight > rightTop.x)
+        else if(spriteRight > screenTopRight.x)
         {
-            clampedPosition.x = rightTop.x - spriteHalfSize.x;
+            clampedPosition.x = screenTopRight.x - spriteHalfSize.x;
         }
-        if(spriteBottom < leftBottom.y)
+        if(spriteBottom < screenLeftBottom.y)
         {
-            clampedPosition.y = leftBottom.y + spriteHalfSize.y;
+            clampedPosition.y = screenLeftBottom.y + spriteHalfSize.y;
         }
-        else if(spriteTop > rightTop.y)
+        else if(spriteTop > screenTopRight.y)
         {
-            clampedPosition.y = rightTop.y - spriteHalfSize.y;
+            clampedPosition.y = screenTopRight.y - spriteHalfSize.y;
         }
         transform.position = clampedPosition;
     }
