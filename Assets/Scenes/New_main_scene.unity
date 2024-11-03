@@ -2887,6 +2887,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3245258039719888017, guid: c8b7d96ff3de54f259559d7019f1aee8, type: 3}
+  coinCollect: {fileID: 8300000, guid: dc28c8c7d48b548bca6464b1e95fd6af, type: 3}
+  playerShoot: {fileID: 8300000, guid: 0f75a99f5a2674feb92a6f791614eae4, type: 3}
   health: 0
   maxHealth: 0
   speed: 0
@@ -3242,6 +3244,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 49109136}
   highscoreText: {fileID: 1265982510}
   popUpText: {fileID: 236136731}
+  playerDamage: {fileID: 8300000, guid: 008040558fb254537810654db5d4d565, type: 3}
   enemySpawnDistanceMin: 0
   enemySpawnDistanceMax: 5
 --- !u!4 &1656193215
