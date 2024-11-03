@@ -40,6 +40,17 @@ public class GameController : MonoBehaviour
         NewGame();
     }
 
+    private bool checkObjectOutsideScreen(GameObject gameObject){
+        if ((gameObject.transform.position.x < screenLeftBottom.x - 1) ||
+            (gameObject.transform.position.x > screenTopRight.x + 1) ||
+            (gameObject.transform.position.y < screenLeftBottom.y - 1) ||
+            (gameObject.transform.position.y > screenTopRight.y + 1)){
+                return true;
+            } else{
+                return false;
+            }
+    }
+
     void Update()
     {
 
@@ -51,7 +62,7 @@ public class GameController : MonoBehaviour
                 if(enemy.dead){
                     KillEnemy(enemy);
                 }
-                if (Vector3.Distance(enemy.transform.position, player.transform.position) <= minDistanceForAttack) {
+                if (Vector3.Distance(enemy.transform.position, player.transform.position) <= minDistanceForAttack){
                     PlayerTakeDamage(enemy.damageDealt, enemy.transform.position);
                 }
                 enemy.EnemyMovement(player.gameObject.transform.position);
@@ -60,8 +71,8 @@ public class GameController : MonoBehaviour
             bullets = GameObject.FindGameObjectsWithTag("Bullet");
             foreach (GameObject bullet in bullets) {
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
-                if (bulletScript != null) {
-                    bulletScript.BulletUpdate();
+                if (checkObjectOutsideScreen(bullet)){
+                    Destroy(bullet);
                 }
             }
             if(WaveOver()){
