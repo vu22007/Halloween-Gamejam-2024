@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
-    Gun equippedGun;
+    public Gun equippedGun;
     List<PowerUp> powerUps;
     public float health;
     public float maxHealth;

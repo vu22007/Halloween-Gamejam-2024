@@ -13,6 +13,6 @@ public class Stats : MonoBehaviour
     public void UpdateTexts(){
         maxHealthText.text = "max health: " + player.maxHealth;
         speedText.text = "speed: " + player.speed;
-        damageText.text = "damage: " + player.damage;
+        damageText.text = "damage: " + player.damage * player.equippedGun.damageWeighting;
     }
 }

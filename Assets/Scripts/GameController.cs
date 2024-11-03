@@ -65,6 +65,7 @@ public class GameController : MonoBehaviour
             }
             if(WaveOver()){
                 running = false;
+                healthBar.gameObject.SetActive(false);
                 shop.StartShop(currentWave);
             }
             
@@ -136,6 +137,7 @@ public class GameController : MonoBehaviour
 
     public void Continue(){
         shop.CloseShop();
+        healthBar.gameObject.SetActive(true);
         running = true;
         NewWave();
     }
