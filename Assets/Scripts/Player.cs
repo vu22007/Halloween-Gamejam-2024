@@ -68,6 +68,10 @@ public class Player : MonoBehaviour
         gameObject.transform.position = new Vector3(0f,0f);
     }
 
+    public void EquipNewGun(Gun gun){
+        equippedGun = gun;
+    }
+
     public void PlayerUpdate(){
         PlayerMovement();
         CheckPlayerBordered();
@@ -155,6 +159,9 @@ public class Player : MonoBehaviour
                 break;
             case "Speed":
                 speed += powerUp.Magnitude;
+                break;
+            case "Damage":
+                damage += powerUp.Magnitude;
                 break;
             default:
                 break;
