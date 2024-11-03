@@ -4,21 +4,20 @@ using UnityEngine.Pool;
 public class Bullet : MonoBehaviour
 {
     Rigidbody2D body;
-    Vector3 direction;
+    Vector3 velocity;
     float health;
     float speed;
 
-    public void OnCreated(Vector3 startDirection, float bulletHealth, float bulletSpeed){
+    public void OnCreated(Vector3 startDirection, float bulletHealth, float speed){
         body = GetComponent<Rigidbody2D>();
-        direction = startDirection;
+        velocity = startDirection * speed;
+        velocity.z = 0;
         health = bulletHealth;
-        speed = bulletSpeed;
     }
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Enemy")) {
             Enemy enemy = other.GetComponent<Enemy>();
-            
             if (enemy != null) {
                 enemy.TakeDamage(health, enemy.transform.position - gameObject.transform.position);
                 Destroy(gameObject);
@@ -27,6 +26,6 @@ public class Bullet : MonoBehaviour
     }
 
     public void BulletUpdate(){
-        gameObject.transform.position += direction * speed * Time.deltaTime;
+        gameObject.transform.position += velocity * Time.deltaTime;
     }
 }
