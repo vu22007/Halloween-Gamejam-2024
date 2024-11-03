@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Shop shop;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] Stats stats;
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] TextMeshProUGUI highscoreText;
     [SerializeField] PopUpText popUpText;
@@ -67,13 +68,9 @@ public class GameController : MonoBehaviour
             
         }
         if(Input.GetKeyDown(KeyCode.Escape) && !shop.isUp){
+            stats.UpdateTexts();
             pauseMenu.SetActive(running);
             running = !running;
-        }
-        //Testing
-        if(Input.GetKeyDown(KeyCode.X) && !shop.isUp){
-            running = false;
-            shop.StartShop(currentWave);
         }
     }
 

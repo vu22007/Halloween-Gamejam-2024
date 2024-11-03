@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     Gun equippedGun;
     List<PowerUp> powerUps;
     public float health;
-    float maxHealth;
-    float speed;
+    public float maxHealth;
+    public float speed;
     public int money;
     float counPickupDistance;
     Rigidbody2D body;
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Vector2 spriteSize;
     Vector2 spriteHalfSize;
-    float damage;
+    public float damage;
     float bulletSpeed;
 
     public void PlayerStart(Vector2 leftBottom, Vector2 topRight){
