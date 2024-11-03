@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
         invincible = false;
     }
 
-    public void TakeDamage(int damage, Vector3 bulletDirection){
+    public void TakeDamage(float damage, Vector3 bulletDirection){
         Vector3 enemyPos = gameObject.transform.position;
 
         if (!isKnockedBack) {
