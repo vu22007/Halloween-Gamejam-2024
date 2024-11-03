@@ -38,9 +38,6 @@ public class GameController : MonoBehaviour
 
         if(running){
             Bullet newBullet = player.PlayerUpdate();
-            if (newBullet != null) {
-                newBullet.SetDamage(player.getGun.Damage);
-            }
             foreach (Enemy enemy in enemies)
             {
                 if(enemy.dead){

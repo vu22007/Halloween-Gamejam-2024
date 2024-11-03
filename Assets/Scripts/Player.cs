@@ -9,34 +9,39 @@ public class Player : MonoBehaviour
     List<PowerUp> powerUps;
     public float health;
     float maxHealth;
-    float speed = 10f;
+    float speed;
     public int money;
     float counPickupDistance;
     Rigidbody2D body;
     float moveLimiter = 0.7f;
-    float coolDownMax = 2f;
-    float coolDownTimer = 0f;
+    float attackCoolDownMax = 2f;
+    float attackCoolDownTimer = 0f;
     public bool dead;
     Camera cam;
     public bool invincible;
     float invincibilityTimer = 0.5f;
-    private Vector2 leftBottom;
-    private Vector2 rightTop;
-    private SpriteRenderer spriteRenderer;
-    private Vector2 spriteSize;
-    private Vector2 spriteHalfSize;
+    Vector2 leftBottom;
+    Vector2 rightTop;
+    SpriteRenderer spriteRenderer;
+    Vector2 spriteSize;
+    Vector2 spriteHalfSize;
+    float damage;
+    float bulletSpeed;
 
     public void PlayerStart(){
         powerUps = new List<PowerUp>();
         body = GetComponent<Rigidbody2D>();
         body.constraints = RigidbodyConstraints2D.None;
         gameObject.transform.position = new Vector3(0f,0f);
-        equippedGun = new Gun();
+        equippedGun = new Gun(0);
         cam = Camera.main;
         maxHealth = 30f;
         health = maxHealth;
         money = 30;
+        speed = 10f;
         dead = false;
+        damage = 10f;
+        bulletSpeed = 30f;
         leftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
         rightTop = Camera.main.ViewportToWorldPoint(Vector3.one);
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -85,14 +90,14 @@ public class Player : MonoBehaviour
     }
 
     public Bullet PlayerAttack(){
-        if (Input.GetMouseButton(0) && (coolDownTimer <= 0)) {
-            coolDownTimer = coolDownMax;
+        if (Input.GetMouseButton(0) && (attackCoolDownTimer <= 0)) {
+            attackCoolDownTimer = attackCoolDownMax / equippedGun.GetFireRateMultiplier();
             Vector2 mousePos = Input.mousePosition;
             Vector3 worldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
             Vector3 direction = (worldPoint - gameObject.transform.position).normalized;
-            return equippedGun.Use(bulletPrefab, gameObject.transform.position, direction);
+            return equippedGun.Use(bulletPrefab, gameObject.transform.position, direction, damage, bulletSpeed);
         } else {
-            coolDownTimer -= Time.deltaTime;
+            attackCoolDownTimer -= Time.deltaTime;
             return null;
         }
     }

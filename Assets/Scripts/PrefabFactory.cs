@@ -16,10 +16,10 @@ public static class PrefabFactory
             }
     }
 
-    public static Bullet SpawnBullet(GameObject prefab, Vector3 spawnPosition, Vector3 moveDirection){
+    public static Bullet SpawnBullet(GameObject prefab, Vector3 spawnPosition, Vector3 moveDirection, float bulletHealth, float bulletSpeed){
         GameObject instantiatedBullet = Object.Instantiate(prefab, spawnPosition, Quaternion.identity);
         Bullet newBullet = instantiatedBullet.GetComponent<Bullet>();
-        newBullet.OnCreated(moveDirection);
+        newBullet.OnCreated(moveDirection, bulletHealth, bulletSpeed);
         return newBullet;
     }
 
