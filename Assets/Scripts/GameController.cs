@@ -45,8 +45,9 @@ public class GameController : MonoBehaviour
 
         if(running){
             player.PlayerUpdate();
-            foreach (Enemy enemy in enemies)
+            for (int i = 0; i < enemies.Count; i++)
             {
+                Enemy enemy = enemies[i];
                 if(enemy.dead){
                     KillEnemy(enemy);
                 }
