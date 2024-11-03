@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour
     int highscore;
     int currentWave;
     bool running;
-
     float minDistanceForAttack = 1.0f;
     private float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
@@ -166,11 +165,27 @@ public class GameController : MonoBehaviour
     }
 
     Vector3 GenerateSpawnLocation(){
-        float randomOne = Random.Range(-10f, 10f);
-        float randomTwo = Random.Range(-10f, 10f);
-        return new Vector3(randomOne,randomTwo);
+        int spawnSide = Random.Range(1, 10);
+        if (spawnSide <= 3) {
+            // Spawn on top
+            float xCoord = Random.Range(screenLeftBottom.x, screenTopRight.x);
+            float yCoord = screenTopRight.y + 20f;
+            return new Vector3(xCoord, yCoord);
+        } else if (spawnSide <= 6) {
+            // Spawn on bottom
+            float xCoord = Random.Range(screenLeftBottom.x, screenTopRight.x);
+            float yCoord = screenLeftBottom.y - 20f;
+            return new Vector3(xCoord, yCoord);
+        } else if (spawnSide <= 8) {
+            // Spawn on left
+            float xCoord = screenLeftBottom.x - 20f;
+            float yCoord = Random.Range(screenLeftBottom.y, screenTopRight.y);
+            return new Vector3(xCoord, yCoord);
+        } else {
+            // Spawn on right
+            float xCoord = screenTopRight.x + 20f;
+            float yCoord = Random.Range(screenLeftBottom.y, screenTopRight.y);
+            return new Vector3(xCoord, yCoord);
+        }
     }
-
-   
-
 }
