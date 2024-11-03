@@ -17,9 +17,9 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy")) {
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null) {
-                float damageTaken = Mathf.Max(health, enemy.Health);
+                float damageTaken = health;
+                health -= Mathf.Min(damageTaken, enemy.Health);
                 enemy.TakeDamage(damageTaken, enemy.transform.position - gameObject.transform.position);
-                health -= damageTaken;
             }
         }
     }
