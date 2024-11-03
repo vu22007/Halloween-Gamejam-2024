@@ -55,9 +55,9 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Coin")) {
             Coin coin = other.GetComponent<Coin>();
             if (coin != null) {
-                SFXPlaying.instance.playSFXCllip(coinCollect, transform, 1f);
                 this.GetMoney(1);
                 Destroy(other.gameObject);
+                SFXPlaying.instance.playSFXCllip(coinCollect, transform, 1f);
             }
         }
     }

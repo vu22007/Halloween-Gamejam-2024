@@ -115,8 +115,8 @@ public class GameController : MonoBehaviour
         if (!isKnockedBack) {
             Vector3 relativePosition = enemyPos - player.transform.position;
             Vector3 knockbackForce = (- relativePosition).normalized * damage * 2;
-            SFXPlaying.instance.playSFXCllip(playerDamage, transform, 1f);
             StartCoroutine(KnockBack(knockbackForce));
+            SFXPlaying.instance.playSFXCllip(playerDamage, transform, 1f);
         }
         player.TakeDamage(damage);
         if(player.dead){

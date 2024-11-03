@@ -1616,6 +1616,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &756064534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756064536}
+  - component: {fileID: 756064535}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &756064535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756064534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4006705e09f8a4b75bf47745fbbfdb48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundFX: {fileID: 3906587207704061842, guid: 9a656140c141d408789feed823c853f7, type: 3}
+--- !u!4 &756064536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756064534}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.3225546, y: -0.23892206, z: -0.07648339}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1013049194
 GameObject:
   m_ObjectHideFlags: 0
@@ -2887,6 +2932,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3245258039719888017, guid: c8b7d96ff3de54f259559d7019f1aee8, type: 3}
+  coinCollect: {fileID: 8300000, guid: dc28c8c7d48b548bca6464b1e95fd6af, type: 3}
+  playerShoot: {fileID: 8300000, guid: 0f75a99f5a2674feb92a6f791614eae4, type: 3}
   health: 0
   maxHealth: 0
   speed: 0
@@ -3242,6 +3289,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 49109136}
   highscoreText: {fileID: 1265982510}
   popUpText: {fileID: 236136731}
+  playerDamage: {fileID: 8300000, guid: 008040558fb254537810654db5d4d565, type: 3}
   enemySpawnDistanceMin: 0
   enemySpawnDistanceMax: 5
 --- !u!4 &1656193215
@@ -4286,3 +4334,4 @@ SceneRoots:
   - {fileID: 1723283346}
   - {fileID: 1656193215}
   - {fileID: 166126145}
+  - {fileID: 756064536}
