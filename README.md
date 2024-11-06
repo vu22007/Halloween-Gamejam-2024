@@ -2,7 +2,7 @@
 
 ## Description
 
-Top down shooter fighting an onslaught of zombies. Made in a team of three Computer Science students, all of whom never having done a gamejam before and the first time using Unity for two members.
+We were given 24 hours to make a zombie apocalypse themed game so we decided on a top down shooter fighting an onslaught of zombies since the concept is quite simple but there's a lot of room for extra contenet if time allowed. Made in a team of three Computer Science students, all of whom never having done a gamejam before and the first time using Unity for two members.
 
 ## Screenshots
 <img width="1440" alt="Screenshot 2024-11-06 at 15 31 25" src="https://github.com/user-attachments/assets/683c8309-39d2-46d3-bedf-15c0fa431320">
